@@ -29,6 +29,19 @@ from evaluate import (  # noqa: E402
     threshold_at_spec,
 )
 
+# Statistik preprocessing piksel yang HARUS sama dengan saat ekstraksi embedding.
+# (dinov2: default timm/ImageNet; rad_dino: diisi dari log kernel — processor HF)
+PIXEL = {
+    "dinov2": {
+        "type": "timm", "id": "vit_base_patch14_dinov2.lvd142m", "size": 518,
+        "mean": (0.485, 0.456, 0.406), "std": (0.229, 0.224, 0.225),
+    },
+    "rad_dino": {
+        "type": "hf", "id": "microsoft/rad-dino", "size": 518,
+        "mean": (0.5307, 0.5307, 0.5307), "std": (0.2588, 0.2588, 0.2588),  # diverifikasi dari log kernel; koreksi bila beda
+    },
+}
+
 
 def sigmoid(z: np.ndarray) -> np.ndarray:
     z = np.clip(z, -60, 60)
@@ -113,6 +126,23 @@ def run_encoder(enc: str, emb_dir: Path, out_dir: Path, supervised_preds: Path |
 
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / f"metrics_{enc}.json").write_text(json.dumps(res, indent=1))
+
+    # ekspor probe untuk serving API (scaler + LR + T + metadata encoder)
+    pix = PIXEL.get(enc, PIXEL["dinov2"])
+    np.savez(
+        out_dir / f"probe_{enc}.npz",
+        scaler_mean=scaler.mean_,
+        scaler_scale=scaler.scale_,
+        coef=clf.coef_.ravel(),
+        intercept=np.array([float(clf.intercept_[0])]),
+        T=np.array([T]),
+        size=np.array([pix["size"]]),
+        pixel_mean=np.array(pix["mean"], dtype=np.float64),
+        pixel_std=np.array(pix["std"], dtype=np.float64),
+        encoder_type=np.array([pix["type"]]),
+        encoder_id=np.array([pix["id"]]),
+    )
+
     reliability_plot(yex, p_ex, out_dir / f"reliability_{enc}.png", f"SSL probe {enc} — external")
     roc_plot({f"{enc} (external)": (yex, p_ex)}, out_dir / f"roc_{enc}.png")
     with (out_dir / f"preds_{enc}.csv").open("w", newline="") as f:
