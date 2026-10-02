@@ -29,7 +29,7 @@ def sh(cmd: list[str]) -> None:
 if not os.path.exists(REPO):
     sh(["git", "clone", "--depth", "1", "https://github.com/Alvnvnc/loop-tb.git", REPO])
 os.chdir(REPO)
-sh([sys.executable, "-m", "pip", "install", "-q", "timm", "huggingface_hub"])
+sh([sys.executable, "-m", "pip", "install", "-q", "timm", "huggingface_hub", "transformers"])
 
 # --- mount datasets (self-healing) ---
 os.makedirs("data/raw", exist_ok=True)
@@ -97,9 +97,9 @@ MEAN, STD = (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
 
 
 class Items(Dataset):
-    def __init__(self, items: list[dict], size: int):
+    def __init__(self, items: list[dict], size: int, mean: tuple = MEAN, std: tuple = STD):
         self.items = items
-        self.tx = T.Compose([T.Resize(size), T.CenterCrop(size), T.ToTensor(), T.Normalize(MEAN, STD)])
+        self.tx = T.Compose([T.Resize(size), T.CenterCrop(size), T.ToTensor(), T.Normalize(mean, std)])
 
     def __len__(self) -> int:
         return len(self.items)
@@ -111,8 +111,9 @@ class Items(Dataset):
 
 
 @torch.no_grad()
-def extract(model, items: list[dict], size: int, device: torch.device, tag: str) -> np.ndarray:
-    dl = DataLoader(Items(items, size), batch_size=32, shuffle=False, num_workers=4, pin_memory=True)
+def extract(model, items: list[dict], size: int, device: torch.device, tag: str,
+            mean: tuple = MEAN, std: tuple = STD) -> np.ndarray:
+    dl = DataLoader(Items(items, size, mean, std), batch_size=32, shuffle=False, num_workers=4, pin_memory=True)
     out = np.zeros((len(items), 0), dtype=np.float32)
     embs = []
     for bi, (x, _) in enumerate(dl):
@@ -138,12 +139,34 @@ ENCODERS = [
 import timm  # noqa: E402
 
 for enc_name, model_id, size in ENCODERS:
+    if all(os.path.exists(f"{out_dir}/emb_{enc_name}_{s}.npy") for s in ("train", "val", "external")):
+        print(f"skip {enc_name} (sudah ada)", flush=True)
+        continue
     try:
         print(f"=== encoder {enc_name} ({model_id}) ===", flush=True)
-        model = timm.create_model(model_id, pretrained=True, num_classes=0, dynamic_img_size=True)
+        mean, std = MEAN, STD
+        if enc_name == "rad_dino":
+            from transformers import AutoImageProcessor, AutoModel
+
+            class HFWrap(torch.nn.Module):
+                def __init__(self, m):
+                    super().__init__()
+                    self.m = m
+
+                def forward(self, x):
+                    out = self.m(pixel_values=x)
+                    return out.last_hidden_state[:, 0] if hasattr(out, "last_hidden_state") else out.pooler_output
+
+            proc = AutoImageProcessor.from_pretrained(model_id)
+            print("rad_dino processor:", proc.image_mean, proc.image_std, proc.size, flush=True)
+            if proc.image_mean:
+                mean, std = tuple(proc.image_mean), tuple(proc.image_std)
+            model = HFWrap(AutoModel.from_pretrained(model_id))
+        else:
+            model = timm.create_model(model_id, pretrained=True, num_classes=0, dynamic_img_size=True)
         model.to(device).eval()
         for split, items in (("train", train_items), ("val", val_items), ("external", ext_items)):
-            emb = extract(model, items, size, device, f"{enc_name}/{split}")
+            emb = extract(model, items, size, device, f"{enc_name}/{split}", mean, std)
             np.save(f"{out_dir}/emb_{enc_name}_{split}.npy", emb)
             print(f"{enc_name} {split}: {emb.shape}", flush=True)
         del model

@@ -31,6 +31,7 @@ from evaluate import (  # noqa: E402
 
 
 def sigmoid(z: np.ndarray) -> np.ndarray:
+    z = np.clip(z, -60, 60)
     return 1 / (1 + np.exp(-z))
 
 
@@ -159,6 +160,24 @@ def main() -> None:
         print(f"{r['encoder']:10s} AUROC {e['auroc']:.4f} [{e['auroc_ci95'][0]:.3f},{e['auroc_ci95'][1]:.3f}] "
               f"| sens@spec90 {e['sens_at_spec_90']:.3f} | ECE {e['ece']:.3f}"
               + (f" | stack {r['stack_with_supervised']['auroc']:.4f}" if "stack_with_supervised" in r else ""))
+
+    # kombinasi rata-rata probabilitas antar encoder SSL
+    preds_files = sorted(args.out.glob("preds_*.csv"))
+    if len(preds_files) > 1:
+        maps = []
+        for f in preds_files:
+            rows = list(csv.DictReader(f.open()))
+            maps.append({r["path"]: (float(r["p"]), int(r["label"])) for r in rows})
+        keys = set(maps[0])
+        for m in maps[1:]:
+            keys &= set(m)
+        ks = sorted(keys)
+        y = np.array([maps[0][k][1] for k in ks])
+        p = np.mean([np.array([m[k][0] for k in ks]) for m in maps], axis=0)
+        comb = full_metrics(y, p)
+        print(f"combined{'x'.join([]) or ''} SSL ({len(maps)} encoder): AUROC {comb['auroc']:.4f} "
+              f"[{comb['auroc_ci95'][0]:.3f},{comb['auroc_ci95'][1]:.3f}] | sens@spec90 {comb['sens_at_spec_90']:.3f}")
+        (args.out / "metrics_combined.json").write_text(json.dumps(comb, indent=1))
 
 
 if __name__ == "__main__":
