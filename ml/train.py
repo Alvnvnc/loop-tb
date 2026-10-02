@@ -105,6 +105,7 @@ def main() -> None:
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--freeze", action="store_true", help="linear probe: backbone beku")
     ap.add_argument("--balanced", action="store_true", help="WeightedRandomSampler")
+    ap.add_argument("--limit", type=int, default=0, help="smoke test: batasi n sampel (0=semua)")
     args = ap.parse_args()
 
     torch.manual_seed(args.seed)
@@ -114,11 +115,24 @@ def main() -> None:
     device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
     manifest = json.loads(args.manifest.read_text())
 
-    ds_tr = CXRManifest(manifest["train"], train=True, img_size=args.img_size)
-    ds_va = CXRManifest(manifest["val"], train=False, img_size=args.img_size)
+    def take(items: list[dict], n: int) -> list[dict]:
+        """Subset berstratifikasi untuk smoke test."""
+        if not n:
+            return items
+        pos = [it for it in items if it["label"] == 1]
+        neg = [it for it in items if it["label"] == 0]
+        n = min(n, len(items))
+        kp = min(len(pos), max(1, n // 4))
+        return pos[:kp] + neg[: max(n - kp, 0)]
+
+    train_items = take(manifest["train"], args.limit)
+    val_items = take(manifest["val"], args.limit)
+
+    ds_tr = CXRManifest(train_items, train=True, img_size=args.img_size)
+    ds_va = CXRManifest(val_items, train=False, img_size=args.img_size)
     sampler = None
     if args.balanced:
-        labels = np.array([it["label"] for it in manifest["train"]])
+        labels = np.array([it["label"] for it in train_items])
         w = np.where(labels == 1, 1.0 / labels.sum(), 1.0 / (len(labels) - labels.sum()))
         sampler = WeightedRandomSampler(torch.from_numpy(w), num_samples=len(labels), replacement=True)
     dl_tr = DataLoader(ds_tr, batch_size=args.batch, shuffle=sampler is None, sampler=sampler,
@@ -172,7 +186,7 @@ def main() -> None:
             with (args.out / "val_preds.csv").open("w", newline="") as f:
                 w = csv.writer(f)
                 w.writerow(["path", "label", "logit"])
-                for it, lg in zip(manifest["val"], logits):
+                for it, lg in zip(val_items, logits):
                     w.writerow([it["path"], it["label"], float(lg)])
 
     (args.out / "history.csv").write_text(
