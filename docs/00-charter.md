@@ -1,7 +1,7 @@
 # Charter — Proyek `loop-tb` (UnivaBio 2026)
 
-> **Status: v1 PROPOSED — menunggu approval. Setelah disetujui → FROZEN.**
-> Setelah frozen, perubahan hanya via ADR baru (lihat §5). Tanggal: 2 Okt 2026.
+> **Status: v1 FROZEN — disetujui & dikunci 2 Okt 2026.**
+> Perubahan hanya via ADR baru (lihat §5).
 
 ## 1. Problem statement
 
@@ -34,7 +34,7 @@ Program nasional TOSS-TB memperluas skrining CXR + distribusi X-ray portabel, te
 
 ## 4. Constraints & non-goals
 
-- **Kapasitas:** solo, 6–8 jam/hari efektif.
+- **Kapasitas:** solo, 6–8 jam/hari efektif. Tanpa GPU lokal → training di Colab/Kaggle (ADR-006).
 - **Deadline policy:** platform = 13 Okt 23:45 EDT; halaman Rules (basi) menulis 7 Okt. **Target internal: submit ≤ 7 Okt WIB** (buffer). Verifikasi via email ke biocataalysis@gmail.com (draft di `03-eksekusi.md`).
 - **Data:** publik saja (daftar di `02-arsitektur.md`). Tanpa validator klinis → mitigasi: guideline resmi + framing "alat triase, bukan diagnosis" + limitations jujur.
 - **NON-GOALS (dilarang masuk MVP):** alat diagnosis; menggantikan GeneXpert; CAD untuk <15 tahun (di luar rekomendasi WHO); analisis suara batuk; multi-penyakit; auth multi-user/RBAC; integrasi SITB otomatis; fitur apapun tanpa baris di coverage matrix (`02-arsitektur.md`).
@@ -45,9 +45,10 @@ Program nasional TOSS-TB memperluas skrining CXR + distribusi X-ray portabel, te
 |---|---|---|
 | ADR-001 | Domain = **TB paru** (beban #2 dunia; loop lengkap; dataset publik; wedge latensi jelas) | accepted — 2 Okt 2026 |
 | ADR-002 | Invarian inti = **state risiko terkalibrasi R(x,t)** sebagai satu-satunya mesin; semua fitur = proyeksinya | accepted — 2 Okt 2026 |
-| ADR-003 | **Scope freeze MVP**: Recognition=DEEP, Access=MEDIUM, Interpretation=MEDIUM, Monitoring=LIGHT, Continuity=LIGHT (detail di `02`) | proposed — butuh approval |
+| ADR-003 | **Scope freeze MVP**: Recognition=DEEP, Access=MEDIUM, Interpretation=MEDIUM, Monitoring=LIGHT, Continuity=LIGHT (detail di `02`) | accepted — 2 Okt 2026 |
 | ADR-004 | Nama produk | ditunda sampai UI freeze |
-| ADR-005 | Deadline policy: target internal 7 Okt, submit awal, buffer 8–13 Okt hanya untuk polish/stretch tercatat | proposed |
+| ADR-005 | Deadline policy: target internal 7 Okt, submit awal, buffer 8–13 Okt hanya untuk polish/stretch tercatat | accepted — 2 Okt 2026 |
+| ADR-006 | Jalur training: **Colab/Kaggle GPU (T4)** — tidak ada GPU lokal; model kecil + checkpoint tiap epoch wajib | accepted — 2 Okt 2026 |
 
 **Kebijakan perubahan (anti-berubah-ubah):**
 1. Setelah freeze, setiap penambahan scope **wajib menghapus item setara** (zero-sum) dan dicatat sebagai ADR superseding.

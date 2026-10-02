@@ -1,0 +1,21 @@
+# Data & artefak besar
+data/
+ml/runs/
+*.pt
+*.onnx
+*.pth
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+.next/
+out/
+
+# OS / editor
+.DS_Store
+*.swp
