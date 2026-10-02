@@ -63,8 +63,9 @@ class CXRManifest(Dataset):
 
 
 def sens_at_spec(y: np.ndarray, p: np.ndarray, spec: float) -> float:
+    """Sensitivitas pada spesifisitas >= spec (mis. spec=0.90 → fpr <= 0.10)."""
     fpr, tpr, _ = roc_curve(y, p)
-    ok = 1 - fpr <= spec + 1e-9
+    ok = fpr <= 1 - spec + 1e-9
     return float(tpr[ok].max()) if ok.any() else float("nan")
 
 

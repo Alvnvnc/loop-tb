@@ -37,14 +37,15 @@ def sigmoid(x: np.ndarray) -> np.ndarray:
 
 
 def sens_at_spec(y: np.ndarray, p: np.ndarray, spec: float) -> float:
+    """Sensitivitas pada spesifisitas >= spec (mis. spec=0.90 → fpr <= 0.10)."""
     fpr, tpr, _ = roc_curve(y, p)
-    ok = 1 - fpr <= spec + 1e-9
+    ok = fpr <= 1 - spec + 1e-9
     return float(tpr[ok].max()) if ok.any() else float("nan")
 
 
 def threshold_at_spec(y: np.ndarray, p: np.ndarray, spec: float) -> float:
     fpr, tpr, thr = roc_curve(y, p)
-    ok = 1 - fpr <= spec + 1e-9
+    ok = fpr <= 1 - spec + 1e-9
     return float(thr[ok][np.argmax(tpr[ok])]) if ok.any() else 0.5
 
 

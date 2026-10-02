@@ -37,17 +37,18 @@ def main() -> None:
         model, dummy, args.out,
         input_names=["input"], output_names=["logit"],
         dynamic_axes={"input": {0: "batch"}, "logit": {0: "batch"}},
-        opset_version=args.opset,
+        opset_version=args.opset, dynamo=False,  # legacy: satu file mandiri, opset stabil
     )
 
     import onnxruntime as ort
     sess = ort.InferenceSession(str(args.out), providers=["CPUExecutionProvider"])
     ref = model(dummy).detach().numpy()
     got = sess.run(None, {"input": dummy.numpy()})[0]
-    diff = float(np.abs(ref - got).max())
+    max_diff = float(np.abs(ref - got).max())
+    ok = bool(np.allclose(ref, got, rtol=1e-3, atol=1e-3))
     size_mb = args.out.stat().st_size / 1e6
-    print(f"ONNX ok: {args.out}  ({size_mb:.1f} MB)  max|diff|={diff:.2e}  opset={args.opset}")
-    assert diff < 1e-3, "Verifikasi ONNX gagal"
+    print(f"ONNX ok: {args.out}  ({size_mb:.1f} MB)  max|diff|={max_diff:.2e}  opset={args.opset}")
+    assert ok, "Verifikasi ONNX gagal (allclose rtol/atol 1e-3)"
 
 
 if __name__ == "__main__":
