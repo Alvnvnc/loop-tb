@@ -23,3 +23,5 @@ out/
 
 # Kaggle kernel output/unduhan
 ml/kaggle/out_*/
+# dataset sementara untuk unggahan Kaggle
+ml/kaggle/nlm_dataset/
