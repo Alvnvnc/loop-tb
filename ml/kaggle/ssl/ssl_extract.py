@@ -148,6 +148,8 @@ for enc_name, model_id, size in ENCODERS:
         if enc_name == "rad_dino":
             from transformers import AutoImageProcessor, AutoModel
 
+            hf_id = model_id.replace("hf-hub:", "")
+
             class HFWrap(torch.nn.Module):
                 def __init__(self, m):
                     super().__init__()
@@ -157,11 +159,11 @@ for enc_name, model_id, size in ENCODERS:
                     out = self.m(pixel_values=x)
                     return out.last_hidden_state[:, 0] if hasattr(out, "last_hidden_state") else out.pooler_output
 
-            proc = AutoImageProcessor.from_pretrained(model_id)
+            proc = AutoImageProcessor.from_pretrained(hf_id)
             print("rad_dino processor:", proc.image_mean, proc.image_std, proc.size, flush=True)
             if proc.image_mean:
                 mean, std = tuple(proc.image_mean), tuple(proc.image_std)
-            model = HFWrap(AutoModel.from_pretrained(model_id))
+            model = HFWrap(AutoModel.from_pretrained(hf_id))
         else:
             model = timm.create_model(model_id, pretrained=True, num_classes=0, dynamic_img_size=True)
         model.to(device).eval()
@@ -169,6 +171,14 @@ for enc_name, model_id, size in ENCODERS:
             emb = extract(model, items, size, device, f"{enc_name}/{split}", mean, std)
             np.save(f"{out_dir}/emb_{enc_name}_{split}.npy", emb)
             print(f"{enc_name} {split}: {emb.shape}", flush=True)
+        with open(f"{out_dir}/encmeta_{enc_name}.json", "w") as f:
+            json.dump({
+                "type": "hf" if enc_name == "rad_dino" else "timm",
+                "id": model_id.replace("hf-hub:", ""),
+                "size": size,
+                "mean": list(mean),
+                "std": list(std),
+            }, f)
         del model
         torch.cuda.empty_cache()
     except Exception as e:  # noqa: BLE001

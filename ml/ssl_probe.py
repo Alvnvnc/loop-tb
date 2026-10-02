@@ -55,6 +55,15 @@ def load_split(emb_dir: Path, enc: str, split: str) -> tuple[np.ndarray, np.ndar
     return X, y, meta
 
 
+def pixel_of(emb_dir: Path, enc: str) -> dict:
+    """Statistik preprocessing piksel: dari encmeta kernel bila ada, else fallback PIXEL."""
+    f = emb_dir / f"encmeta_{enc}.json"
+    if f.exists():
+        d = json.loads(f.read_text())
+        return {"type": d["type"], "id": d["id"], "size": d["size"], "mean": tuple(d["mean"]), "std": tuple(d["std"])}
+    return PIXEL.get(enc, PIXEL["dinov2"])
+
+
 def band_metrics(y: np.ndarray, p: np.ndarray, tau_low: float, tau_high: float) -> dict:
     band = np.where(p >= tau_high, "rujuk_prioritas", np.where(p < tau_low, "negatif_skrining", "ragu"))
     rep = {}
@@ -128,7 +137,7 @@ def run_encoder(enc: str, emb_dir: Path, out_dir: Path, supervised_preds: Path |
     (out_dir / f"metrics_{enc}.json").write_text(json.dumps(res, indent=1))
 
     # ekspor probe untuk serving API (scaler + LR + T + metadata encoder)
-    pix = PIXEL.get(enc, PIXEL["dinov2"])
+    pix = pixel_of(emb_dir, enc)
     np.savez(
         out_dir / f"probe_{enc}.npz",
         scaler_mean=scaler.mean_,
