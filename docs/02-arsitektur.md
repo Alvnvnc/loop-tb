@@ -44,10 +44,13 @@ R(x, t) = {
 
 | Dataset | Isi | Peran | Catatan |
 |---|---|---|---|
-| TBX11K (Kaggle: vbookshelf/tbx11k-simplified) | 11.200 citra 512², bbox TB | **Train/val utama** | Ukuran cukup untuk fine-tune |
-| Rahman TB Database (Kaggle: tawsifurrahman) | 7.000 citra (3.500/3.500) | **Train** | WAJIB dedup provenance — 88,4% "normal" dari satu arsip RS (Bilal 2026) |
-| NLM Shenzhen (662) + Montgomery (138) | TB/normal berlabel + metadata usia/jenis kelamin | **External test — tidak boleh tersentuh training** | Ikut terpengaruh confounding; dipakai untuk mengukur jatuhnya performa secara jujur |
+| TBX11K (vbookshelf/tbx11k-simplified) | 8.399 berlabel 512²: **660 active TB**; 7.600 negatif (3.800 healthy + 3.800 sick-but-no-TB); 139 latent dikeluarkan; +3.302 `unknown_*` tanpa label (tidak dipakai) | **Train/val utama** | Label dari `data.csv` (otoritatif); task sulit by design: sick-but-no-TB = negatif |
+| Rahman (tawsifurrahman) — folder `TB_Chest_Radiography_Database/` | **700 TB / 3.500 normal** | **Train** | WAJIB dedup — 88,4% "normal" dari satu arsip RS; semua TB dari koleksi khusus (Bilal 2026) |
+| NLM Shenzhen | **336 TB / 326 normal** (662 citra) | **External test** | Sumber resmi NLM; tidak boleh tersentuh training |
+| NLM Montgomery | **58 TB / 80 normal** (138 citra) + ClinicalReadings (usia/sex) | **External test** + subgrup | idem |
 | Mendeley Pakistani TB CXR V2 | kohort RS Pakistan | External tambahan (stretch) | doi:10.17632/8j2g3csprk.2 |
+
+Imbalance train ≈ 1.360 TB : 11.100 negatif (~1:8) → pakai `--balanced` + metrik yang tidak sensitif kelas (AUROC, sens@spec) sebagai metrik utama.
 
 **Aturan integritas (tidak bisa dinegosiasi):**
 1. Dedup perseptual (pHash/embedding) + provenance audit mengikuti metode Bilal 2026 (tools + source-matched hashes tersedia publik).
