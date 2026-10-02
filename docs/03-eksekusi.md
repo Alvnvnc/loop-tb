@@ -49,3 +49,7 @@
 2. Zero-sum: tambah 1 fitur = hapus 1 fitur setara.
 3. Fitur wajib punya baris di coverage matrix (`02-arsitektur.md` §2).
 4. Keputusan besar (>30 menit debat) ditolak default demi momentum.
+
+## 6. Log progres
+
+- **2 Okt — D0 selesai:** rencana frozen (ADR-003/005/006); data terunduh (TBX11K 8.399 berlabel + Rahman 4.200 + NLM 800); **manifest v1** (train 10.288 / val 1.815 / external 800; 338 duplikat internal + **19 kebocoran cross-corpus** dibuang); repo publik berisi kode + artefak manifest; metadata klinis NLM 789 baris (21 scar-flagged); **smoke test ML end-to-end di CPU** — 2 bug nyata ditemukan & diperbaiki (kondisi spesifisitas terbalik; exporter ONNX butuh `dynamo=False` + toleransi relatif); UI web lengkap (Skrining, Pendampingan, Ringkasan klinisi, Tentang) build hijau.
