@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>SIGAP — One-Page Project Description</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f2f4f5; --ink: #14181d; --film: #0b0f13; --bone: #e9e7e0;
+    --refer: #c0392b; --defer: #b7791f; --clear: #2e7d5b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); color: var(--ink); font-family: "Plus Jakarta Sans", sans-serif; }
+  @page { size: A4; margin: 0; }
+  .page { width: 210mm; min-height: 297mm; padding: 14mm 14mm 12mm; display: flex; flex-direction: column; gap: 5mm; }
+  h1 { font-size: 30px; letter-spacing: -0.02em; }
+  h2 { font-size: 12px; font-weight: 700; letter-spacing: 0.01em; color: #14181d; margin-bottom: 2mm; }
+  p, li, td, th { font-size: 9.4px; line-height: 1.55; color: #2a2f36; }
+  .row { display: flex; gap: 6mm; }
+  .col { flex: 1; }
+  .tag { font-size: 9px; color: #5a616b; }
+  .rule { border-top: 1px solid rgba(20,24,29,.12); padding-top: 4mm; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 1.6mm 2mm; border-bottom: 1px solid rgba(20,24,29,.12); }
+  th { font-size: 8.6px; text-transform: none; color: #5a616b; font-weight: 600; }
+  td.num { font-variant-numeric: tabular-nums; font-weight: 700; }
+  .verdict { background: var(--film); color: var(--bone); border-radius: 10px; padding: 4.5mm 5mm; }
+  .verdict h2 { color: var(--bone); }
+  .verdict p { color: rgba(233,231,224,.85); }
+  .chip { display: inline-block; font-size: 8.6px; font-weight: 700; border-radius: 6px; padding: 1mm 2mm; margin-right: 1.5mm; }
+  .chip.refer { background: rgba(192,57,43,.12); color: var(--refer); }
+  .chip.defer { background: rgba(183,121,31,.14); color: var(--defer); }
+  .chip.clear { background: rgba(46,125,91,.12); color: var(--clear); }
+  .kv { display: flex; justify-content: space-between; gap: 4mm; font-size: 9.4px; padding: 1.2mm 0; border-bottom: 1px dashed rgba(20,24,29,.15); }
+  .kv b { font-variant-numeric: tabular-nums; }
+  .foot { margin-top: auto; font-size: 8.6px; color: #5a616b; border-top: 1px solid rgba(20,24,29,.12); padding-top: 3mm; }
+  .big { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .hero { display: flex; align-items: baseline; gap: 4mm; }
+  ul { padding-left: 4.5mm; }
+  li { margin-bottom: 1mm; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="hero">
+    <h1>SIGAP</h1>
+    <span class="tag">Calibrated TB screening triage · UnivaBio 2026 · AI for Human Health · github.com/Alvnvnc/loop-tb</span>
+  </header>
+
+  <section class="rule">
+    <h2>Problem</h2>
+    <p>Indonesia carries <b>10% of the world’s TB burden</b> (WHO Global TB Report 2025). About <b>200,000 people per year transmit TB before ever being detected</b>, and screening is bottlenecked by chest-X-ray reading capacity at the last mile. Root cause: <b>the care loop moves slower than transmission</b>.</p>
+  </section>
+
+  <section class="rule">
+    <h2>What we built — one calibrated risk state, three interfaces</h2>
+    <div class="row">
+      <div class="col">
+        <p><b>1 · Screen.</b> A chest X-ray becomes a calibrated risk with a <i>deferral band</i>: when model families disagree, SIGAP says “uncertain — human read” instead of forcing a verdict.</p>
+        <p style="margin-top:2mm"><b>2 · Refer.</b> The score maps to an action band (refer today / re-read / educate) and a printable referral letter for GeneXpert confirmation.</p>
+        <p style="margin-top:2mm"><b>3 · Support.</b> The same risk state follows the patient home: adherence check-ins update the score and trigger escalation.</p>
+      </div>
+      <div class="col verdict">
+        <h2>Demo: two real external cases</h2>
+        <p><span class="chip refer">REFER</span> TB+ X-ray → p(TB)=0.98, disagreement u=0.01</p>
+        <p style="margin-top:1.5mm"><span class="chip defer">UNCERTAIN</span> normal X-ray from an unseen site → p(TB)=0.32, u=0.37 → “human re-read”</p>
+        <p style="margin-top:2mm">IDS-first, mobile-first UI for community health workers; &lt;3 minutes per patient; audit-friendly outputs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rule">
+    <h2>Evidence — we report the number most projects hide</h2>
+    <table>
+      <thead><tr><th>Evaluation</th><th>AUROC</th><th>sens@spec90</th><th>Calibration (ECE)</th></tr></thead>
+      <tbody>
+        <tr><td>Internal random split <i>(the illusion)</i></td><td class="num">0.98 – 0.9999</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>External hospitals — supervised fine-tune (EfficientNet-B0 + ConvNeXt-T)</td><td class="num">0.675 [0.636–0.712]</td><td class="num">0.27</td><td class="num">0.21</td></tr>
+        <tr><td><b>External — RAD-DINO self-supervised probe (final model)</b></td><td class="num"><b>0.887 [0.862–0.909]</b></td><td class="num"><b>0.71</b></td><td class="num">0.25</td></tr>
+      </tbody>
+    </table>
+    <div class="row" style="margin-top:3mm">
+      <div class="col">
+        <p><b>Data audit before training.</b> Perceptual-hash de-duplication removed <b>338 internal duplicates</b> and <b>19 training images that leaked into the external test set</b>; the frozen split manifest is published.</p>
+      </div>
+      <div class="col">
+        <p><b>Representation study (3 families).</b> Domain-pretrained SSL (RAD-DINO, chest X-ray) beats supervised fine-tuning by <b>+0.21 AUROC</b> on unseen hospitals, while stacking/ensembling across families <i>hurts</i> (tested, reported).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rule">
+    <h2>Honesty &amp; limitations</h2>
+    <div class="row">
+      <div class="col">
+        <ul>
+          <li>Research triage prototype — <b>not a diagnostic device</b>; GeneXpert confirmation stays mandatory.</li>
+          <li>WHO target (sens &gt; 90%) is <b>not yet met</b>; reported as-is (0.71 at spec 0.90).</li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul>
+          <li>No Indonesian data in training; site thresholds do not fully transfer — measured over-triage is reported, not hidden.</li>
+          <li>Retrospective public data (radiographic labels), aggressive re-processing may evade de-duplication.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="rule">
+    <h2>Stack</h2>
+    <div class="kv"><span>Model</span><b>RAD-DINO (SSL, chest X-ray) + linear probe · temperature scaling · cross-family disagreement deferral</b></div>
+    <div class="kv"><span>Engineering</span><b>PyTorch / timm / scikit-learn · FastAPI serving + Grad-CAM · Next.js (ID-first) · Kaggle T4 training via API</b></div>
+    <div class="kv"><span>Reproducibility</span><b>Public repo: frozen data manifest, audit reports, external evaluation scripts, model configs</b></div>
+  </section>
+
+  <footer class="foot">
+    <span class="big">SIGAP</span> — screen faster than the disease spreads. Built by Alvin Reba (solo) · Code, frozen splits and evaluation: github.com/Alvnvnc/loop-tb · This page describes a research prototype, not a diagnostic device.
+  </footer>
+</div>
+</body>
+</html>
