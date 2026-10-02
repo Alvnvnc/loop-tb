@@ -40,7 +40,8 @@
 | Pembanding: supervised EB0+ConvNeXt | 0,675 [0,636–0,712] | 0,266 | 0,212 |
 | Pembanding: DINOv2 umum | 0,736 [0,698–0,768] | 0,383 | 0,329 |
 
-- **Uji perilaku deployment** (tools/model_checks.py): 60 citra eksternal via HTTP API dibandingkan dengan evaluasi offline; robustness kompresi JPEG q85. Lihat `ml/runs/deploy_checks.json`.
+- **Uji perilaku deployment** (`tools/model_checks.py`, 60 citra eksternal via HTTP API): API vs evaluasi offline → **Pearson r=0,986**, mean|Δp|=0,034, AUROC sampel **0,864 vs 0,867** offline — jalur deployment mereproduksi evaluasi setelah preprocessing disamakan (pra-resize 512px).
+- Robustness kompresi **JPEG q85**: mean|Δp|=0,065, maks 0,28 → rekomendasi operasional: kirim citra kualitas penuh; hindari kompresi berat.
 - Angka internal (0,98–0,9999) dilaporkan untuk transparansi tetapi **tidak boleh dianggap** ukuran keselamatan: dataset publik mengandung confounding akuisisi (Bilal 2026).
 
 ## 5. Kalibrasi & ketidakpastian

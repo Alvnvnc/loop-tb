@@ -23,6 +23,8 @@ Deadline platform: **13 Okt 2026 23:45 EDT** · halaman Rules (basi) menulis 7 O
 - [x] **Artefak model dipublikasikan** (GitHub Release `models-v1` + `scripts/fetch_models.sh`)
 - [x] **Surat rujukan (cetak) terverifikasi** — `submission/screenshots/referral_letter_print.png`
 - [x] LICENSE (MIT + catatan intended use)
+- [x] **Uji perilaku deployment**: API vs offline r=0,986 (AUROC sampel 0,864 vs 0,867); robustness JPEG terdokumentasi
+- [x] **Model card** formal (`docs/05-model-card.md`)
 - [ ] **Deploy live** (HF Spaces) — opsional; butuh token HF dari pemilik akun
 - [ ] Upload video (YouTube unlisted) → link ke Devpost
 - [ ] Submit di platform Devpost (butuh login pemilik akun)
