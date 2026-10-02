@@ -20,6 +20,7 @@ Output (ml/data/artifacts/):
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import re
 from collections import Counter
@@ -46,7 +47,28 @@ def _tokens(path: Path) -> set[str]:
     return set(parts)
 
 
-def classify(path: Path, raw: Path) -> tuple[int, str] | None:
+def load_tbx11k_map(raw: Path) -> dict[str, int | None]:
+    """Label otoritatif dari data.csv TBX11K: 1=active_tb, 0=no_tb, None=latent (dikeluarkan)."""
+    m: dict[str, int | None] = {}
+    for p in raw.rglob("data.csv"):
+        if "tbx11k" not in str(p).lower():
+            continue
+        for r in csv.DictReader(p.open()):
+            f = (r.get("fname") or "").strip()
+            if not f:
+                continue
+            t = (r.get("tb_type") or "").lower()
+            tgt = (r.get("target") or "").lower()
+            if "latent" in t:
+                m.setdefault(f, None)
+            elif tgt == "tb":
+                m[f] = 1
+            else:
+                m.setdefault(f, 0)
+    return m
+
+
+def classify(path: Path, raw: Path, tbx_map: dict[str, int | None]) -> tuple[int, str] | None:
     """Return (label, source) atau None kalau tidak bisa diklasifikasi."""
     rel = path.relative_to(raw)
     low = str(rel).lower()
@@ -63,9 +85,14 @@ def classify(path: Path, raw: Path) -> tuple[int, str] | None:
         return None
 
     if "tbx11k" in low:
-        if toks & POS_TOKENS:
+        if tbx_map:
+            lab = tbx_map.get(path.name, None)
+            return None if lab is None else (lab, "tbx11k")
+        # fallback bila data.csv tidak ada: prefix nama file
+        stem = path.stem.lower()
+        if stem.startswith("t"):
             return 1, "tbx11k"
-        if toks & NEG_TOKENS:
+        if stem.startswith(("h", "s")):
             return 0, "tbx11k"
         return None
 
@@ -127,10 +154,12 @@ def main() -> None:
     # ---------- 1) discovery ----------
     labeled: list[dict] = []
     unlabeled = Counter()
+    tbx_map = load_tbx11k_map(raw)
+    print(f"[discovery] label TBX11K dari data.csv: {len(tbx_map)} entri")
     for p in sorted(raw.rglob("*")):
         if p.suffix.lower() not in IMG_EXTS:
             continue
-        cls = classify(p, raw)
+        cls = classify(p, raw, tbx_map)
         if cls is None:
             unlabeled[str(p.relative_to(raw).parent)] += 1
             continue
