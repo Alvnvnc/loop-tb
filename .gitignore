@@ -25,3 +25,10 @@ out/
 ml/kaggle/out_*/
 # dataset sementara untuk unggahan Kaggle
 ml/kaggle/nlm_dataset/
+
+# aset video mentah (besar)
+submission/video_assets/raw/
+submission/video_assets/*.webm
+submission/video_assets/part*.mp4
+submission/video_assets/frame_*.png
+submission/video_assets/*.html
