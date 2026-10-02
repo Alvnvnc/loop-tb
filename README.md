@@ -51,7 +51,9 @@ kaggle kernels push -p ml/kaggle/train && bash ml/kaggle/wait_train.sh
 .venv/bin/python ml/evaluate.py --runs ml/runs/eb0 ml/runs/convnext \
     --manifest ml/data/artifacts/manifest.json --split external --temp-scale \
     --meta ml/data/artifacts/meta_nlm.csv --out ml/runs/eval_external_ens
-# 5) UI + API
+# 5) artefak model (final RAD-DINO probe + baseline supervised)
+bash scripts/fetch_models.sh
+# 6) UI + API
 cd web && npm run dev
 uvicorn api.main:app --port 8000
 ```

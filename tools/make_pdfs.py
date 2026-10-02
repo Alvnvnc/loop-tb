@@ -21,6 +21,7 @@ CODE_GLOBS = [
     "ml/kaggle/**/*.py",
     "api/*.py",
     "api/*.json",
+    "scripts/*.sh",
     "tools/*.py",
     "web/src/**/*.ts",
     "web/src/**/*.tsx",
