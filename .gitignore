@@ -20,3 +20,6 @@ out/
 # OS / editor
 .DS_Store
 *.swp
+
+# Kaggle kernel output/unduhan
+ml/kaggle/out_*/

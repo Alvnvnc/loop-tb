@@ -1,0 +1,16 @@
+{
+  "id": "alvinreba/loop-tb-hello",
+  "title": "loop-tb hello",
+  "code_file": "hello.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "vbookshelf/tbx11k-simplified",
+    "tawsifurrahman/tuberculosis-tb-chest-xray-dataset"
+  ],
+  "competition_sources": [],
+  "kernel_sources": []
+}
