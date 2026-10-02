@@ -2,7 +2,7 @@
 # Pantau kernel training Kaggle sampai selesai/gagal, lalu unduh output.
 # Dipakai sebagai background job; menulis progres tiap 60 detik.
 set -uo pipefail
-SLUG="alvinreba/loop-tb-train"
+SLUG="alvinreba/loop-tb-train-eb0-convnext-baseline"
 OUT="ml/kaggle/out_train"
 
 for i in $(seq 1 300); do

@@ -1,6 +1,6 @@
 {
-  "id": "alvinreba/loop-tb-train",
-  "title": "loop-tb train (eb0 + convnext + baseline)",
+  "id": "alvinreba/loop-tb-train-eb0-convnext-baseline",
+  "title": "loop-tb-train-eb0-convnext-baseline",
   "code_file": "train_kernel.py",
   "language": "python",
   "kernel_type": "script",
