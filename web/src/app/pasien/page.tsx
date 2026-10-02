@@ -223,7 +223,7 @@ export default function PasienPage() {
             <input
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              placeholder="Catatan singkat (opsional)"
+              placeholder="Catatan (opsional)"
               className="min-w-0 flex-1 rounded-[8px] border border-ink/20 bg-white px-3 py-2.5 text-[14px] outline-none focus:border-ink/50"
             />
             <button
