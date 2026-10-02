@@ -1,5 +1,6 @@
 # Data & artefak besar
-data/
+/data/
+ml/data/artifacts/
 ml/runs/
 *.pt
 *.onnx
