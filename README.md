@@ -58,6 +58,21 @@ cd web && npm run dev
 uvicorn api.main:app --port 8000
 ```
 
+## Deployment (satu Space = UI + API)
+
+`api/main.py` bisa menyajikan static export Next.js sehingga satu server melayani UI dan API (same-origin):
+
+```bash
+# butuh token Hugging Face (read+write): HF_TOKEN=... bash api/deploy_hf.sh
+# skrip: build web (NEXT_EXPORT=1) → upload UI + API + models ke Space
+
+# uji unified secara lokal:
+(cd web && NEXT_EXPORT=1 NEXT_PUBLIC_API_URL="" npm run build)
+LOOPTB_STATIC=web/out uvicorn api.main:app --port 8000   # buka http://localhost:8000
+```
+
+Artefak model: [Release `models-v1`](https://github.com/Alvnvnc/loop-tb/releases/tag/models-v1) — unduh otomatis dengan `bash scripts/fetch_models.sh`.
+
 ## Dokumen kunci
 
 - `docs/00-charter.md` — problem statement, user, ADR log (keputusan terkunci)
