@@ -1,0 +1,2511 @@
+{
+ "pairs_within_threshold": 381,
+ "clusters": 12899,
+ "dropped_cross_corpus": [
+  {
+   "path": "data/raw/TB_Chest_Radiography_Database/Normal/Normal-1475.png",
+   "label": 0,
+   "source": "rahman",
+   "cluster": 529,
+   "phash": 15937889758878306077
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0081.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 4341,
+   "phash": 9329776305503041657
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0104.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 9330058775838416667
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0277.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 9329777300844797791
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0482.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 9330058775821377403
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0727.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 4957,
+   "phash": 11060565918942435663
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1049.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 4749,
+   "phash": 10765870332882411130
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1317.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 10482698805467504475
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2109.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 9329777300845059962
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2526.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 9329777300844928891
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2662.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 9329777300845059931
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2994.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 4376,
+   "phash": 9312044377379266428
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3675.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 9329777369564536411
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3819.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 9329777300845059423
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4520.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 4379,
+   "phash": 9329793872424827360
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4750.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 9329777300861706075
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4848.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 4363,
+   "phash": 10483049618380508955
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4958.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 9329846570077609819
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1080.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6601,
+   "phash": 10482698805451643743
+  }
+ ],
+ "dropped_internal_dup": [
+  {
+   "path": "data/raw/TB_Chest_Radiography_Database/Normal/Normal-3473.png",
+   "label": 0,
+   "source": "rahman",
+   "cluster": 1187,
+   "phash": 11060004069441091817
+  },
+  {
+   "path": "data/raw/TB_Chest_Radiography_Database/Normal/Normal-568.png",
+   "label": 0,
+   "source": "rahman",
+   "cluster": 569,
+   "phash": 15652689409450318621
+  },
+  {
+   "path": "data/raw/TB_Chest_Radiography_Database/Tuberculosis/Tuberculosis-244.png",
+   "label": 1,
+   "source": "rahman",
+   "cluster": 3660,
+   "phash": 15941124298799783770
+  },
+  {
+   "path": "data/raw/TB_Chest_Radiography_Database/Tuberculosis/Tuberculosis-348.png",
+   "label": 1,
+   "source": "rahman",
+   "cluster": 3774,
+   "phash": 10226726256491540950
+  },
+  {
+   "path": "data/raw/TB_Chest_Radiography_Database/Tuberculosis/Tuberculosis-36.png",
+   "label": 1,
+   "source": "rahman",
+   "cluster": 3521,
+   "phash": 9830521387173747535
+  },
+  {
+   "path": "data/raw/TB_Chest_Radiography_Database/Tuberculosis/Tuberculosis-405.png",
+   "label": 1,
+   "source": "rahman",
+   "cluster": 3818,
+   "phash": 14806236916465104941
+  },
+  {
+   "path": "data/raw/TB_Chest_Radiography_Database/Tuberculosis/Tuberculosis-430.png",
+   "label": 1,
+   "source": "rahman",
+   "cluster": 3809,
+   "phash": 9899570674983102392
+  },
+  {
+   "path": "data/raw/TB_Chest_Radiography_Database/Tuberculosis/Tuberculosis-469.png",
+   "label": 1,
+   "source": "rahman",
+   "cluster": 3908,
+   "phash": 10026402656053719166
+  },
+  {
+   "path": "data/raw/TB_Chest_Radiography_Database/Tuberculosis/Tuberculosis-471.png",
+   "label": 1,
+   "source": "rahman",
+   "cluster": 3829,
+   "phash": 15599806460629239326
+  },
+  {
+   "path": "data/raw/TB_Chest_Radiography_Database/Tuberculosis/Tuberculosis-510.png",
+   "label": 1,
+   "source": "rahman",
+   "cluster": 3955,
+   "phash": 15738327382590200389
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0055.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7484,
+   "phash": 10482143552079879803
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0239.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8357,
+   "phash": 9329793845042305887
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0245.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5102,
+   "phash": 15289512184653958941
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0284.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5192,
+   "phash": 10482697784307579373
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0409.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5278,
+   "phash": 10482433827444580121
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0759.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5400,
+   "phash": 10482769242914381657
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h0995.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5400,
+   "phash": 10483050717891088217
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1057.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5807,
+   "phash": 15293453866227420940
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1058.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5192,
+   "phash": 11059158536619129317
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1354.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7484,
+   "phash": 10482416232054087257
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1418.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5639,
+   "phash": 10482996858986264953
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1597.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7484,
+   "phash": 10482134824706334331
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1705.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5359,
+   "phash": 10482416299665219449
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1781.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7484,
+   "phash": 10482134824723111545
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1827.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5400,
+   "phash": 11059581838938677017
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1831.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6390,
+   "phash": 10477939101202807161
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1876.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6235,
+   "phash": 10482715377063786977
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1887.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5639,
+   "phash": 10482979266800220665
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1894.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5365,
+   "phash": 10749531969192491128
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1899.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5322,
+   "phash": 10482979267856398713
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1902.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5964,
+   "phash": 15289512201829510461
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1920.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5705,
+   "phash": 10483049628028451301
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1932.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6378,
+   "phash": 10482697758636464761
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1956.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6329,
+   "phash": 11059441101517037083
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h1958.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5889,
+   "phash": 9907644415477316073
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2074.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5583,
+   "phash": 10482152429862861289
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2172.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5278,
+   "phash": 10482152348172902265
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2218.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5639,
+   "phash": 10483049635542563193
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2228.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 3073,
+   "phash": 15293453886374690045
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2286.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5889,
+   "phash": 9907644415477365225
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2311.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6754,
+   "phash": 15865550776652733007
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2427.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5676,
+   "phash": 11054109579317770601
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2491.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 1110,
+   "phash": 15869914642956303548
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2738.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 616,
+   "phash": 15293453864851427103
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2775.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5109,
+   "phash": 10477939088418568504
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2801.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7121,
+   "phash": 9329777352451775323
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2837.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6306,
+   "phash": 15095298797226372393
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h2908.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6151,
+   "phash": 15094172961714687769
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3030.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5192,
+   "phash": 11059158536611002733
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3059.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6578,
+   "phash": 10477921461772188025
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3085.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7046,
+   "phash": 15293524234971057950
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3091.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6822,
+   "phash": 11054091995718777081
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3147.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5638,
+   "phash": 10482417330542304795
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3183.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5122,
+   "phash": 10478053471852395097
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3294.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7484,
+   "phash": 10482416299666267739
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3331.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5996,
+   "phash": 10482486668427226425
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3335.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5676,
+   "phash": 11054109579317762921
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3344.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7263,
+   "phash": 15649733956462279033
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3348.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7121,
+   "phash": 9329777352384666491
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3416.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6715,
+   "phash": 10477939084056492378
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3420.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5192,
+   "phash": 11059158536611133669
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3441.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6433,
+   "phash": 10482785744179902779
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3482.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6508,
+   "phash": 15289441815909519199
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3498.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5607,
+   "phash": 10986959577031366430
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3500.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5278,
+   "phash": 9329231943077683065
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3602.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5599,
+   "phash": 10987594613594201625
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3608.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6657,
+   "phash": 9329495825931263837
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3620.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7484,
+   "phash": 10477912700038897499
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3664.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7525,
+   "phash": 10482698848484417369
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3693.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 3449,
+   "phash": 11059440011653560555
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3721.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5006,
+   "phash": 15293453933638209308
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3757.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6746,
+   "phash": 15294016927447264334
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3764.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6754,
+   "phash": 15865550776921168459
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3768.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5967,
+   "phash": 15288950335046839855
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3793.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8357,
+   "phash": 9329794970323737183
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3822.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7880,
+   "phash": 10483049618447620889
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3830.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5278,
+   "phash": 10482152416858824569
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3848.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6628,
+   "phash": 10482134824723103577
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3910.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6650,
+   "phash": 15654303523180321103
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3924.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7780,
+   "phash": 15293383497479311135
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3931.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6567,
+   "phash": 15941126523523643629
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3932.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5802,
+   "phash": 11059441135874087513
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3947.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7978,
+   "phash": 11060567018520255289
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3970.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6244,
+   "phash": 10482134841869302623
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3975.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5645,
+   "phash": 15289512236210203965
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h3987.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6545,
+   "phash": 10482134804324120697
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4004.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6923,
+   "phash": 15293453866260712973
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4054.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7678,
+   "phash": 15005222188667076123
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4092.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7484,
+   "phash": 10482416299699822169
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4166.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7519,
+   "phash": 15005222476463099677
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4194.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8357,
+   "phash": 9325431008673094495
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4211.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7903,
+   "phash": 15076158494516072283
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4217.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8075,
+   "phash": 15293396691618319917
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4221.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7484,
+   "phash": 10477912700034703199
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4239.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6914,
+   "phash": 10482980349114408793
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4252.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6415,
+   "phash": 15293453857637166908
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4272.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8357,
+   "phash": 9329793870812109663
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4289.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7810,
+   "phash": 10477657591866424155
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4316.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5102,
+   "phash": 15289512184653827933
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4387.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6482,
+   "phash": 10765870332882411353
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4388.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5850,
+   "phash": 15293242553735782169
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4391.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5521,
+   "phash": 10482979250693299033
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4431.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8357,
+   "phash": 10482152425398426463
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4432.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7548,
+   "phash": 15293102022506270511
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4436.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5320,
+   "phash": 15005232285895831343
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4450.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7925,
+   "phash": 10477657548916750969
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4495.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6563,
+   "phash": 9330058844607831833
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4510.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6777,
+   "phash": 10478009388338405241
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4526.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6415,
+   "phash": 15293313128738746156
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4561.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 616,
+   "phash": 15293453865119862047
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4601.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 2373,
+   "phash": 11059018888959713049
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4613.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5967,
+   "phash": 15293453865954733615
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4636.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 7880,
+   "phash": 10483049618380643097
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4647.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8311,
+   "phash": 15293383496409509496
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4669.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8357,
+   "phash": 9329793870745000799
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4744.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5967,
+   "phash": 15293453865958911535
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4766.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5967,
+   "phash": 15293453900318648879
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4788.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6390,
+   "phash": 10477939105497774457
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4805.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5661,
+   "phash": 10477640026525952377
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4839.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5492,
+   "phash": 9329301281012932441
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4859.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 723,
+   "phash": 9907644414469953869
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4871.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5292,
+   "phash": 10482134756070743898
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4874.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6133,
+   "phash": 10483824774078885244
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4960.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6032,
+   "phash": 15293453934946570009
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/h4965.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8311,
+   "phash": 15293383496409443964
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0215.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8930,
+   "phash": 10988509338602663228
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0256.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5400,
+   "phash": 11059300363961982745
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0278.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8992,
+   "phash": 15936252069460569170
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0398.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8859,
+   "phash": 15361569709704047947
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0480.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8839,
+   "phash": 11033123191127629151
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0623.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9012,
+   "phash": 10482980349214870331
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0632.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8924,
+   "phash": 15936639094467022622
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0664.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6560,
+   "phash": 9331255388070038297
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0707.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8982,
+   "phash": 9835587095292177333
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0715.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9082,
+   "phash": 15955341449026669948
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0740.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8817,
+   "phash": 11041426702975400761
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0759.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8953,
+   "phash": 15307173562420260670
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0905.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 489,
+   "phash": 11054250302711421660
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0935.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9152,
+   "phash": 11058737431088888413
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s0990.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9237,
+   "phash": 11041071560702631535
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1016.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8852,
+   "phash": 15289446159246454138
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1066.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8969,
+   "phash": 15856685052771221171
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1088.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9466,
+   "phash": 15937186105863777567
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1102.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9477,
+   "phash": 15928178942010774231
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1267.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9425,
+   "phash": 11042759345376403019
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1281.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9735,
+   "phash": 10959798994560973545
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1282.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9767,
+   "phash": 10987381789489520474
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1294.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 806,
+   "phash": 10477930877960173589
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1337.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9429,
+   "phash": 11046281085484349932
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1345.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 442,
+   "phash": 10465875474427733433
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1421.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9305,
+   "phash": 11042353877371688598
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1441.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 1931,
+   "phash": 9329231201139882179
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1450.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9177,
+   "phash": 15865972972155840956
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1542.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 1156,
+   "phash": 10477640025484782968
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1623.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9759,
+   "phash": 10402003542517480376
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1657.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9655,
+   "phash": 15937749055817198774
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1719.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5400,
+   "phash": 11059159626473627481
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1758.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 1693,
+   "phash": 11056201957021203181
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1765.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8906,
+   "phash": 11028545925280267006
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1770.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9141,
+   "phash": 15293392293269974319
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1778.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8315,
+   "phash": 10482785744198515109
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1779.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9341,
+   "phash": 15936781538092981676
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1939.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9857,
+   "phash": 15598594554046847397
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1964.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9682,
+   "phash": 10987381308389941240
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1983.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9876,
+   "phash": 15307316542921526863
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1987.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9460,
+   "phash": 11253729479002515837
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s1995.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9748,
+   "phash": 11059511470258150171
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2005.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10019,
+   "phash": 15937749056085626141
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2014.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9109,
+   "phash": 10969017300666096473
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2068.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9582,
+   "phash": 11100535383683692895
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2117.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10025,
+   "phash": 11059509477393390875
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2139.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10215,
+   "phash": 15936763889373235231
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2150.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10287,
+   "phash": 15960201930405149761
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2164.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9554,
+   "phash": 15652634403778796221
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2166.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9951,
+   "phash": 15378774594186726686
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2193.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8957,
+   "phash": 15927705052761628186
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2194.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5400,
+   "phash": 11059300398321704729
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2210.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10079,
+   "phash": 15094112144991276383
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2249.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10280,
+   "phash": 10411133861408365342
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2254.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9542,
+   "phash": 15865409726151478622
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2276.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10411,
+   "phash": 15648255061900744991
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2287.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8909,
+   "phash": 10961486728289494774
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2295.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10163,
+   "phash": 10988014559507864926
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2312.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 331,
+   "phash": 10482996858994682289
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2343.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 3059,
+   "phash": 15293453856249212221
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2345.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9648,
+   "phash": 15288105960566693807
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2349.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9320,
+   "phash": 15937206392181186377
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2413.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10305,
+   "phash": 9833899052852936569
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2415.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9109,
+   "phash": 10969017300666620745
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2449.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5964,
+   "phash": 15289512201896602941
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2458.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 2998,
+   "phash": 11059088175414581593
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2500.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9902,
+   "phash": 10979501142889326502
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2507.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10676,
+   "phash": 10482231616067168699
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2542.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9139,
+   "phash": 14775837876464397999
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2558.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9928,
+   "phash": 15864723910064347709
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2568.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10338,
+   "phash": 15653341699023309337
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2583.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9871,
+   "phash": 15936856249423710744
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2609.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10224,
+   "phash": 15648697082672912957
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2610.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9565,
+   "phash": 15936627313656667004
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2653.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10210,
+   "phash": 15936624290016598551
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2665.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10529,
+   "phash": 15654237745151875453
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2752.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9444,
+   "phash": 11059438937823583225
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2760.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8940,
+   "phash": 15927615682045065431
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2801.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9901,
+   "phash": 15936077764824415654
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2856.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9356,
+   "phash": 15936218536974501917
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2857.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10086,
+   "phash": 10969580490047707929
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2871.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6189,
+   "phash": 11059510405025839417
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2904.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9555,
+   "phash": 10978376342520291240
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2932.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10958,
+   "phash": 15937749022531153512
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2953.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9040,
+   "phash": 10978376342485810665
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2977.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10901,
+   "phash": 10978939258111876478
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s2993.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10995,
+   "phash": 15598610684753397314
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3006.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 449,
+   "phash": 15289653789479509895
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3012.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9669,
+   "phash": 15652760913114176835
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3041.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5322,
+   "phash": 10482979250676529529
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3051.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10339,
+   "phash": 15937326775974567453
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3062.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 1172,
+   "phash": 15289375535666195448
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3098.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9196,
+   "phash": 14226597746429480297
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3106.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8937,
+   "phash": 10482223086330788341
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3113.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10641,
+   "phash": 10987522045941325658
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3115.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5754,
+   "phash": 15865972885484097309
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3201.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 5700,
+   "phash": 11054672528969099757
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3255.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9012,
+   "phash": 10410922755176946491
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3266.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10962,
+   "phash": 10482231594594187703
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3270.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9008,
+   "phash": 9618650088222756153
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3282.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10435,
+   "phash": 10988507208296783706
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3287.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9767,
+   "phash": 10987381793784224603
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3291.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9419,
+   "phash": 15936362499978250271
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3370.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 954,
+   "phash": 15293593504170348059
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3378.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8885,
+   "phash": 11042341690978553626
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3385.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10682,
+   "phash": 15927057383510635702
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3438.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11334,
+   "phash": 15667748629933279548
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3446.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9207,
+   "phash": 11023060494969151033
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3479.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9175,
+   "phash": 14704048660974238952
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3517.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10035,
+   "phash": 15936640748094319796
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3576.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8807,
+   "phash": 11258370501477486366
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3597.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10792,
+   "phash": 10988720805659744780
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3624.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9418,
+   "phash": 15937186123244972349
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3628.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9698,
+   "phash": 9834673658794675487
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3642.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9806,
+   "phash": 15364964812948510783
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3648.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11415,
+   "phash": 15938034873257512220
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3655.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 1042,
+   "phash": 10987592414562180894
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3662.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10401,
+   "phash": 15288418183246605146
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3669.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10343,
+   "phash": 9905956681250601337
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3677.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10658,
+   "phash": 11041496006534970808
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3687.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10586,
+   "phash": 10988578693699160445
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3714.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10042,
+   "phash": 9329505171779640287
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3741.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9030,
+   "phash": 15937767194470731081
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3756.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10722,
+   "phash": 15938028092259110620
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3763.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10517,
+   "phash": 10987524279227996792
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3786.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11435,
+   "phash": 15937326603874229573
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3791.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9935,
+   "phash": 9258001181783587707
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3794.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9528,
+   "phash": 9902860406023356357
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3834.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9350,
+   "phash": 15378335133133723928
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3844.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10391,
+   "phash": 15960337182146501401
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3878.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9242,
+   "phash": 11031938984404774308
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3886.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9369,
+   "phash": 15361499410820189513
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3902.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11719,
+   "phash": 15936223772538374685
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3912.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10703,
+   "phash": 9834602774650248987
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3921.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11718,
+   "phash": 10970143169417125244
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3943.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 6166,
+   "phash": 15289512185793957647
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s3977.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11554,
+   "phash": 15937764414888418077
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4003.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9003,
+   "phash": 11059510645644421432
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4015.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9056,
+   "phash": 10181583515416338287
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4017.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 651,
+   "phash": 11036078713860815097
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4019.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9010,
+   "phash": 9311410063306332525
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4026.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10563,
+   "phash": 15077214008535641405
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4030.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10889,
+   "phash": 15647990852675656475
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4058.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10182,
+   "phash": 15004827764607491098
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4069.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10748,
+   "phash": 15653182180716989305
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4090.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10548,
+   "phash": 10482161230131591673
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4092.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10090,
+   "phash": 10988507208295742841
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4110.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11657,
+   "phash": 15927616764602397395
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4112.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11351,
+   "phash": 10969017265249934622
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4121.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10481,
+   "phash": 15865409763415769016
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4187.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10207,
+   "phash": 11037732000342297880
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4217.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11936,
+   "phash": 11253656912325856606
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4218.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9948,
+   "phash": 10961486728283125991
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4231.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9767,
+   "phash": 10987381789489258331
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4240.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10571,
+   "phash": 10987522081278466653
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4245.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9206,
+   "phash": 15937819391241834061
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4248.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11470,
+   "phash": 15000736194139991355
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4275.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10349,
+   "phash": 15937186038218050655
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4279.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11624,
+   "phash": 15937203732375754959
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4284.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9870,
+   "phash": 15648608022197533689
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4316.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8465,
+   "phash": 9329566194674917151
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4337.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10770,
+   "phash": 9547089507464854715
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4411.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10956,
+   "phash": 9835236058991254877
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4414.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9654,
+   "phash": 10988509338567014779
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4415.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9289,
+   "phash": 15937401542678629721
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4442.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10270,
+   "phash": 11031942590581274939
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4449.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10213,
+   "phash": 15598577774629767258
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4496.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8832,
+   "phash": 10986891407307394398
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4529.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 8875,
+   "phash": 15928337198938398470
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4537.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10581,
+   "phash": 10987031663725846137
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4567.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11905,
+   "phash": 15936639098763036955
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4574.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9233,
+   "phash": 10988017117950773551
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4576.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11850,
+   "phash": 9835236369068005661
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4596.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9405,
+   "phash": 15652760877730962201
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4607.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10717,
+   "phash": 10987381583335086874
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4617.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10088,
+   "phash": 10680826664786091295
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4621.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9381,
+   "phash": 10988508291704518881
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4626.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11116,
+   "phash": 9258142262867746682
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4647.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11351,
+   "phash": 10969015066226679071
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4678.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 12083,
+   "phash": 10988157597857553497
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4702.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11043,
+   "phash": 9601118337705540472
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4748.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11356,
+   "phash": 11329510866373531741
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4749.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11700,
+   "phash": 15289125706383052061
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4809.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 11762,
+   "phash": 11059457603773528709
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4818.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10839,
+   "phash": 14784354143805720907
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4844.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10248,
+   "phash": 11058596676489570809
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4851.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 889,
+   "phash": 15599067262456060699
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4856.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9025,
+   "phash": 15936622898463972732
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4862.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 12140,
+   "phash": 9330287543999617848
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4932.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 12271,
+   "phash": 15586121676911893823
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4950.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10824,
+   "phash": 15865343669554728798
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4960.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 12468,
+   "phash": 15361569726950894652
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4968.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 10633,
+   "phash": 9834549998059600701
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4974.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 9647,
+   "phash": 15927620110134405300
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/s4976.png",
+   "label": 0,
+   "source": "tbx11k",
+   "cluster": 12143,
+   "phash": 15397739331401882456
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0037.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 11505,
+   "phash": 11054602167873255759
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0079.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 7978,
+   "phash": 11060567018520386105
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0086.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 9971,
+   "phash": 15937608078045547101
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0141.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 5973,
+   "phash": 15865974080085494607
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0212.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 6390,
+   "phash": 10477939105496791417
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0256.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 5667,
+   "phash": 15870476305512208455
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0300.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 12762,
+   "phash": 11059018888986450457
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0386.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 12762,
+   "phash": 11059581838938823193
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0558.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 5802,
+   "phash": 10987383541836159609
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0571.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 9724,
+   "phash": 10987451711560047161
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0664.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 7943,
+   "phash": 10482161225854220773
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb0739.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 6578,
+   "phash": 10477921444592319865
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb1004.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 8563,
+   "phash": 15288949167121911581
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb1023.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 13082,
+   "phash": 9906519614039874425
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb1030.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 6244,
+   "phash": 10482134841869302143
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb1079.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 7225,
+   "phash": 11059581873365015065
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb1148.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 12157,
+   "phash": 11059505972705323452
+  },
+  {
+   "path": "data/raw/tbx11k-simplified/images/tb1180.png",
+   "label": 1,
+   "source": "tbx11k",
+   "cluster": 5400,
+   "phash": 10987524244900749145
+  }
+ ],
+ "unlabeled_by_dir": {
+  "tbx11k-simplified/images": 140,
+  "tbx11k-simplified/test": 3302
+ }
+}

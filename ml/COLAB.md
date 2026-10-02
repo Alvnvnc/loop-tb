@@ -30,18 +30,21 @@ files.upload()  # pilih kaggle.json
 !mkdir -p data/raw
 !kaggle datasets download -d vbookshelf/tbx11k-simplified -p data/raw --unzip
 !kaggle datasets download -d tawsifurrahman/tuberculosis-tb-chest-xray-dataset -p data/raw --unzip
-# NLM Shenzhen + Montgomery (external test) — unduh dari sumber resmi:
-# https://data.lhncbc.nlm.nih.gov/public/Tuberculosis-Chest-X-ray-Datasets/
-# atau mirror Kaggle (raddar/tuberculosis-chest-xrays-shenzhen). Ekstrak ke data/raw/nlm/
+!bash ml/data/download_nlm.sh data/raw/nlm
 ```
 
-## 4) Build manifest (dedup provenance WAJIB)
+## 4) Manifest — verifikasi (JANGAN regenerate sembarangan)
+
+`ml/data/artifacts/manifest.json` + `dedup_report.json` sudah ter-commit (split v1 FROZEN, path relatif).
 
 ```python
-!python ml/data/prepare_data.py --raw data/raw --out ml/data/artifacts
+import json
+m = json.load(open('ml/data/artifacts/manifest.json'))
+print(m['meta']['counts'])   # train 10288 / val 1815 / external 800
 ```
 
-Cek output: jumlah train/val/external + laporan duplikat yang dibuang.
+Regenerate hanya bila struktur data berubah — dan sadar bahwa split akan berbeda:
+`!python ml/data/prepare_data.py --raw data/raw --out ml/data/artifacts`
 
 ## 5) Training (jalankan berurutan; simpan checkpoint ke Drive)
 

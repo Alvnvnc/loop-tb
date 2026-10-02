@@ -41,6 +41,14 @@ NEG_TOKENS = {"healthy", "normal", "sick"}
 EXCLUDE_TOKENS = {"latent", "latent_tb", "latenttb"}
 
 
+def _rel(p: Path, root: Path) -> str:
+    """Path relatif terhadap root repo (portable lokal <-> Colab); fallback absolut."""
+    try:
+        return str(p.relative_to(root))
+    except ValueError:
+        return str(p)
+
+
 def _tokens(path: Path) -> set[str]:
     parts = [p.lower() for p in path.parts]
     parts += [path.stem.lower()]
@@ -150,6 +158,7 @@ def main() -> None:
 
     args.out.mkdir(parents=True, exist_ok=True)
     raw = args.raw.resolve()
+    root = raw.parent.parent  # asumsi struktur <root>/data/raw
 
     # ---------- 1) discovery ----------
     labeled: list[dict] = []
@@ -164,7 +173,7 @@ def main() -> None:
             unlabeled[str(p.relative_to(raw).parent)] += 1
             continue
         label, source = cls
-        labeled.append({"path": str(p), "label": label, "source": source})
+        labeled.append({"path": _rel(p, root), "label": label, "source": source})
 
     print(f"[discovery] berlabel={len(labeled)}  tak-terklasifikasi={sum(unlabeled.values())}")
     for k, v in unlabeled.most_common(10):
@@ -241,7 +250,8 @@ def main() -> None:
 
     manifest = {
         "meta": {
-            "raw": str(raw),
+            "root": str(root),
+            "raw": _rel(raw, root),
             "dup_threshold": args.dup_threshold,
             "val_frac": args.val_frac,
             "seed": args.seed,
