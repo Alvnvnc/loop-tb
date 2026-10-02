@@ -87,11 +87,11 @@ def infer(ckpt_path: Path, items: list[dict], img_size: int, device: torch.devic
 
 
 def fit_temperature(val_logits: list[np.ndarray], val_y: np.ndarray) -> float:
-    """Cari T>0 yang meminimalkan NLL pada val (grid search halus)."""
+    """Cari T>0 yang meminimalkan NLL pada val (grid log-space lebar untuk logit besar)."""
     logits = torch.tensor(np.mean(val_logits, axis=0), dtype=torch.float32)
     y = torch.tensor(val_y, dtype=torch.float32)
     best_t, best_nll = 1.0, float("inf")
-    for t in np.linspace(0.25, 10.0, 200):
+    for t in np.logspace(-1, 3.5, 500):
         nll = nn.functional.binary_cross_entropy_with_logits(logits / t, y).item()
         if nll < best_nll:
             best_t, best_nll = float(t), nll
