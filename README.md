@@ -21,9 +21,10 @@ Indonesia adalah negara beban TB **#2 dunia** (10% kasus global 2024, WHO GTR 20
 | Evaluasi | AUROC |
 |---|---|
 | Val internal (split acak) | 0,98–0,9999 ← *ilusi within-corpus* |
-| **Eksternal (rumah sakit berbeda)** | **0,64–0,68** (supervised) · *SSL menyusul* |
+| Eksternal supervised (rumah sakit berbeda) | 0,64–0,68 |
+| **Eksternal probe RAD-DINO (model final)** | **0,887 [0,862–0,909] · sens@spec90 0,713** |
 
-Fenomena ini persis yang didokumentasikan `Bilal 2026` (*class-conditional acquisition confounding*). Kami mengukurnya di data kami sendiri, membuang kebocoran yang ditemukan, dan **melaporkan dua angka, bukan satu**. Detail: `docs/04-evidensi-data.md`.
+Kami mengukur ilusi ita, membuang kebocoran yang ditemukan (338 duplikat internal + **19 citra train yang bocor ke test set eksternal**), lalu **studi representasi** menunjukkan pra-latih domain (RAD-DINO pada X-ray dada) mengalahkan fine-tuning supervised sebesar +0,21 AUROC di domain asing. **Dua angka dilaporkan, bukan satu.** Detail: `docs/04-evidensi-data.md`.
 
 ## Struktur
 

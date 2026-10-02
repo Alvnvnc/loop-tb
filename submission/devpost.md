@@ -26,9 +26,10 @@ SIGAP memampatkan latensi itu dengan **satu state risiko** yang menggerakkan sel
 | Evaluasi | AUROC |
 |---|---|
 | Val internal (split acak) | 0,98–0,9999 ← **ilusi** |
-| **Eksternal (rumah sakit berbeda, 800 citra)** | **0,64–0,68** (supervised) · *[SSL menyusul]* |
+| Eksternal supervised (RS berbeda, 800 citra) | 0,64–0,68 |
+| **Eksternal probe RAD-DINO (model final)** | **0,887 [0,862–0,909] · sens@spec90 0,713** |
 
-Kami melaporkan dua angka, bukan satu. Model yang tampak sempurna di split internal jatuh saat pindah korpus — persis fenomena *class-conditional acquisition confounding* yang baru terdokumentasi (Bilal 2026). **Inilah alasan produk ini dibangun sebagai triase berkalibrasi dengan keputusan manusia tetap di dalam loop — bukan "AI diagnosis".**
+Studi representasi kami (3 keluarga model) menunjukkan **SSL pra-latih pada domain** (RAD-DINO, X-ray dada) mengalahkan fine-tuning supervised +0,21 AUROC di rumah sakit asing, dan ensemble/stacking lintas-keluarga justru menurunkan. Kami melaporkan dua angka, bukan satu — model yang "sempurna" di split internal jatuh saat pindah korpus, persis fenomena *class-conditional acquisition confounding* (Bilal 2026). **Inilah alasan produk ini dibangun sebagai triase berkalibrasi dengan keputusan manusia tetap di dalam loop — bukan "AI diagnosis".**
 
 ## Challenges
 

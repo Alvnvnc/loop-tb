@@ -1,0 +1,10 @@
+{
+  "score_members": [{ "path": "models/probe_rad_dino.npz" }],
+  "uncertainty_members": [
+    { "path": "models/probe_rad_dino.npz" },
+    { "path": "models/probe_dinov2.npz" },
+    { "path": "models/eb0.pt", "T": 1.2336 },
+    { "path": "models/convnext.pt", "T": 1.3405 }
+  ],
+  "bands": { "tau_low": 0.0233, "tau_high": 0.0977, "tau_uncertainty": 0.25 }
+}

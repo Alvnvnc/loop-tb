@@ -58,18 +58,20 @@ python -c "import json; m=json.load(open('ml/data/artifacts/manifest.json')); pr
 5. **Aksi perbaikan (ADR-007):** studi representasi SSL (DINOv2 + RAD-DINO khusus X-ray dada) — audit melaporkan probe SSL mencapai ~0,88 pada transfer terkontrol; hasil menyusul di bagian 7.
 6. **Deferral berbasis ketidakpastian (ensemble disagreement):** pada data eksternal, kelompok 20% dengan disagreement tertinggi punya TB-rate 31% vs 54% pada sisanya → τ_u=0,40 dipakai di API `model_config.json` sebagai pemicu band "ragu".
 
-## 7. Studi representasi SSL (ADR-007) — hasil sementara
+## 7. Studi representasi SSL (ADR-007) — HASIL FINAL (2 Okt)
 
 | Representasi (probe linear, fitur beku) | Val AUROC | **Eksternal AUROC [95% CI]** | sens@spec90 | ECE |
 |---|---|---|---|---|
-| **DINOv2** (SSL umum) | 0,9987 | **0,7357 [0,698–0,768]** | 0,383 | 0,329 |
+| **RAD-DINO** (X-ray dada, SSL) — **DIPILIH** | 0,9982 | **0,8874 [0,862–0,909]** | **0,713** | 0,247 |
+| Kombinasi DINOv2+RAD-DINO | — | 0,8579 [0,831–0,883] | 0,670 | — |
+| Stack RAD-DINO + supervised | — | 0,8092 | — | — |
+| DINOv2 (SSL umum) | 0,9987 | 0,7357 [0,698–0,768] | 0,383 | 0,329 |
 | Supervised ensemble (EB0+ConvNeXt) | — | 0,6751 [0,636–0,712] | 0,266 | 0,212 |
-| Stack supervised + DINOv2 | — | 0,7107 | — | — |
 | Linear probe (fitur ImageNet beku) | 0,9802 | 0,6366 [0,597–0,671] | 0,254 | 0,322 |
-| RAD-DINO (X-ray dada, SSL) | — | *berjalan* | — | — |
 
-**Temuan:**
-- Representasi SSL **transfer lebih baik** (+0,06 AUROC eksternal; sens@spec90 0,383 vs 0,266) — sejalan dengan audit Bilal (2026).
-- **Stacking dengan supervised justru menurunkan** performa (0,736 → 0,711): anggota yang lempar di domain asing menyeret ensemble. Pemenang sementara: probe DINOv2 tunggal.
-- Val tetap ~0,999 → ilusi within-corpus tidak hilang dengan SSL; hanya evaluasi eksternal yang menentukan.
-- Keterbatasan: ECE eksternal masih 0,33 (domain shift berat); τ triase tetap diambil dari val dan dilaporkan apa adanya.
+**Keputusan final (ADR-007):**
+- **Skor = probe RAD-DINO tunggal** (eksternal AUROC 0,887; sens@spec90 0,713). Catatan jujur: TPP WHO mensyaratkan sensitivitas >0,90 — kita belum sampai, dan itu dilaporkan.
+- **Ketidakpastian = std 4 anggota lintas-keluarga** (RAD-DINO, DINOv2, EB0, ConvNeXt): di eksternal, defer 25% → TB-rate grup ragu 32% vs 55% sisanya; τ_u=0,25.
+- **Ensemble/stacking dengan supervised menurunkan performa** di domain asing (0,887→0,809) → dibuang.
+- Pelajaran utama: **representasi pra-latih pada domain (X-ray dada) mendominasi fine-tuning** untuk transfer lintas-rumah-sakit (+0,21 AUROC vs supervised; sens@spec90 2,7× lebih baik). Sejalan audit Bilal (2026): SSL 0,883 pada LOCO.
+- Demo API final: kasus TB asli → p 0,98/u 0,006 → "rujuk"; kasus normal domain-shift → p 0,32/u 0,37 → "ragu".

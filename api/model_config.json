@@ -1,8 +1,10 @@
 {
-  "score_members": [{ "path": "ml/runs/ssl_eval/probe_dinov2.npz" }],
+  "score_members": [{ "path": "ml/runs/ssl_eval/probe_rad_dino.npz" }],
   "uncertainty_members": [
+    { "path": "ml/runs/ssl_eval/probe_rad_dino.npz" },
+    { "path": "ml/runs/ssl_eval/probe_dinov2.npz" },
     { "path": "ml/runs/eb0/best.pt", "T": 1.2336 },
     { "path": "ml/runs/convnext/best.pt", "T": 1.3405 }
   ],
-  "bands": { "tau_low": 0.0346, "tau_high": 0.0863, "tau_uncertainty": 0.2 }
+  "bands": { "tau_low": 0.0233, "tau_high": 0.0977, "tau_uncertainty": 0.25 }
 }
