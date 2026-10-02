@@ -10,6 +10,7 @@ RUN pip install --no-cache-dir torch torchvision --index-url https://download.py
 
 COPY main.py model_config.json ./
 COPY models ./models
+COPY static ./static
 
 EXPOSE 7860
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]

@@ -6,6 +6,11 @@ SPACE_NAME="${SPACE_NAME:-sigap-api}"
 STAGE="/tmp/opencode/hf_space"
 
 rm -rf "$STAGE" && mkdir -p "$STAGE/models"
+
+# UI statis (Next export, API same-origin via path relatif)
+( cd web && NEXT_EXPORT=1 NEXT_PUBLIC_API_URL="" npm run build )
+cp -r web/out "$STAGE/static"
+
 cp api/main.py api/requirements.txt api/model_config_space.json "$STAGE/"
 mv "$STAGE/model_config_space.json" "$STAGE/model_config.json"
 cp ml/runs/ssl_eval/probe_rad_dino.npz ml/runs/ssl_eval/probe_dinov2.npz ml/runs/eb0/best.pt ml/runs/convnext/best.pt "$STAGE/models/"

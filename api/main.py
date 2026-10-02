@@ -260,3 +260,12 @@ async def predict(file: UploadFile = File(...)) -> dict:
         "disclaimer": "Alat triase skrining — bukan diagnosis. Wajib konfirmasi (GeneXpert) oleh tenaga kesehatan.",
         "heatmap_png_b64": heatmap_b64,
     }
+
+
+# --- UI statis (mode deployment unified: satu Space melayani UI + API) ---
+_STATIC = Path(os.environ.get("LOOPTB_STATIC", "static"))
+if _STATIC.is_dir():
+    from fastapi.staticfiles import StaticFiles
+
+    app.mount("/", StaticFiles(directory=str(_STATIC), html=True), name="ui")
+    print(f"[SIGAP] UI statis dilayani dari {_STATIC}")

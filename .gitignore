@@ -32,3 +32,6 @@ submission/video_assets/*.webm
 submission/video_assets/part*.mp4
 submission/video_assets/frame_*.png
 submission/video_assets/*.html
+
+# hasil build static export (deploy)
+web/out/
