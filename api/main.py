@@ -138,8 +138,20 @@ def band_of(p: float, u: float, bands: dict) -> str:
     return "ragu"
 
 
+def _pre_resize(img: Image.Image, max_dim: int) -> Image.Image:
+    """Samakan preprocessing dengan saat ekstraksi embedding SSL (dataset NLM di-resize 512px)."""
+    if max_dim <= 0:
+        return img
+    w, h = img.size
+    scale = max_dim / max(w, h)
+    if scale < 1:
+        return img.resize((max(1, round(w * scale)), max(1, round(h * scale))), Image.LANCZOS)
+    return img
+
+
 def infer_prob(member: dict, img: Image.Image) -> float:
     if member["kind"] == "probe":
+        img = _pre_resize(img, member.get("pre_resize", 512))
         x = preprocess(img, member["size"], member.get("pixel_mean", MEAN), member.get("pixel_std", STD))
         with torch.no_grad():
             feats = member["model"](x).float().numpy()[0]
@@ -180,7 +192,8 @@ def gradcam(member: dict, img: Image.Image) -> np.ndarray | None:
             cam = _cam_from_tokens(grads[0], acts[0], tuple(x.shape[-2:]))
     else:
         mean, std = member.get("pixel_mean", MEAN), member.get("pixel_std", STD)
-        x = preprocess(img, member["size"], mean, std)
+        img_in = _pre_resize(img, member.get("pre_resize", 512))
+        x = preprocess(img_in, member["size"], mean, std)
         model.zero_grad(set_to_none=True)
         if hasattr(model, "forward_features"):
             feats = model.forward_features(x)
