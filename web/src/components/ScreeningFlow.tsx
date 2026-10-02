@@ -308,8 +308,8 @@ export default function ScreeningFlow() {
               <div className="rounded-[10px] border border-ink/12 bg-white/70 p-4">
                 <h3 className="text-[14px] font-bold">Yang dilihat model</h3>
                 <p className="mt-1.5 text-[14px] leading-relaxed text-ink/70">
-                  Area yang paling memengaruhi skor disorot pada peta perhatian. Pada contoh ini,
-                  perhatian tersebar — indikasi bukti belum konklusif.
+                  Area yang paling memengaruhi skor disorot pada peta perhatian — untuk diverifikasi
+                  manusia, bukan dikutip sebagai bukti lesi.
                 </p>
               </div>
               <div className="rounded-[10px] border border-defer/35 bg-defer/5 p-4">
