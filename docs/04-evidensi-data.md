@@ -57,3 +57,19 @@ python -c "import json; m=json.load(open('ml/data/artifacts/manifest.json')); pr
 4. **Subgrup adil:** AUROC eksternal F 0,669 / M 0,682; usia 0–30: 0,631 · 30–50: 0,707 · 50+: 0,737 (tidak ada disparitas besar; celah di kelompok muda).
 5. **Aksi perbaikan (ADR-007):** studi representasi SSL (DINOv2 + RAD-DINO khusus X-ray dada) — audit melaporkan probe SSL mencapai ~0,88 pada transfer terkontrol; hasil menyusul di bagian 7.
 6. **Deferral berbasis ketidakpastian (ensemble disagreement):** pada data eksternal, kelompok 20% dengan disagreement tertinggi punya TB-rate 31% vs 54% pada sisanya → τ_u=0,40 dipakai di API `model_config.json` sebagai pemicu band "ragu".
+
+## 7. Studi representasi SSL (ADR-007) — hasil sementara
+
+| Representasi (probe linear, fitur beku) | Val AUROC | **Eksternal AUROC [95% CI]** | sens@spec90 | ECE |
+|---|---|---|---|---|
+| **DINOv2** (SSL umum) | 0,9987 | **0,7357 [0,698–0,768]** | 0,383 | 0,329 |
+| Supervised ensemble (EB0+ConvNeXt) | — | 0,6751 [0,636–0,712] | 0,266 | 0,212 |
+| Stack supervised + DINOv2 | — | 0,7107 | — | — |
+| Linear probe (fitur ImageNet beku) | 0,9802 | 0,6366 [0,597–0,671] | 0,254 | 0,322 |
+| RAD-DINO (X-ray dada, SSL) | — | *berjalan* | — | — |
+
+**Temuan:**
+- Representasi SSL **transfer lebih baik** (+0,06 AUROC eksternal; sens@spec90 0,383 vs 0,266) — sejalan dengan audit Bilal (2026).
+- **Stacking dengan supervised justru menurunkan** performa (0,736 → 0,711): anggota yang lempar di domain asing menyeret ensemble. Pemenang sementara: probe DINOv2 tunggal.
+- Val tetap ~0,999 → ilusi within-corpus tidak hilang dengan SSL; hanya evaluasi eksternal yang menentukan.
+- Keterbatasan: ECE eksternal masih 0,33 (domain shift berat); τ triase tetap diambil dari val dan dilaporkan apa adanya.

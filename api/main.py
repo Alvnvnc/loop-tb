@@ -5,14 +5,15 @@ Jalankan lokal:
 
 Konfigurasi (default `api/model_config.json`, override env LOOPTB_CONFIG):
 {
-  "members": [
-    {"path": "ml/runs/ssl_eval/probe_dinov2.npz"},   // probe SSL (disarankan)
-    {"path": "ml/runs/eb0/best.pt", "T": 1.2336}      // checkpoint supervised
-  ],
-  "bands": {"tau_low": ..., "tau_high": ..., "tau_uncertainty": 0.4}
+  "score_members":   [ {"path": "ml/runs/ssl_eval/probe_dinov2.npz"} ],
+  "uncertainty_members": [ {"path": "ml/runs/eb0/best.pt", "T": 1.2336},
+                           {"path": "ml/runs/convnext/best.pt", "T": 1.3405} ],
+  "bands": {"tau_low": ..., "tau_high": ..., "tau_uncertainty": 0.2}
 }
 
-Probs = rata-rata sigmoid(z_i / T_i); ketidakpastian = std antar anggota.
+Skor p = rata-rata prob anggota `score_members` (model terbaik untuk AUROC eksternal).
+Ketidakpastian u = std antar SEMUA anggota unik (disagreement lintas-keluarga SSL↔supervised).
+Jika hanya ada satu anggota total, u = 0.
 """
 from __future__ import annotations
 
@@ -38,7 +39,7 @@ from torchvision import transforms as T
 CONFIG_PATH = Path(os.environ.get("LOOPTB_CONFIG", "api/model_config.json"))
 MEAN, STD = (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
 
-app = FastAPI(title="loop-tb (SIGAP)", version="0.3.0")
+app = FastAPI(title="loop-tb (SIGAP)", version="0.4.0")
 app.add_middleware(
     CORSMiddleware, allow_origins=["*"], allow_credentials=False,
     allow_methods=["*"], allow_headers=["*"],
@@ -52,7 +53,7 @@ def sigmoid(z: float) -> float:
 
 
 class HFViT(nn.Module):
-    """Pembungkus model HF (mis. RAD-DINO) -> CLS token sebagai fitur."""
+    """Pembungkus model HF (mis. RAD-DINO) → CLS token sebagai fitur."""
 
     def __init__(self, model_id: str):
         super().__init__()
@@ -70,10 +71,9 @@ def _load_member(spec: dict) -> dict:
     if path.endswith(".npz"):
         d = np.load(path, allow_pickle=False)
         enc_type, enc_id = str(d["encoder_type"][0]), str(d["encoder_id"][0])
-        if enc_type == "hf":
-            model: nn.Module = HFViT(enc_id)
-        else:
-            model = timm.create_model(enc_id, pretrained=True, num_classes=0, dynamic_img_size=True)
+        model: nn.Module = HFViT(enc_id) if enc_type == "hf" else timm.create_model(
+            enc_id, pretrained=True, num_classes=0, dynamic_img_size=True
+        )
         return {
             "kind": "probe",
             "model": model.eval(),
@@ -101,11 +101,26 @@ def _load_member(spec: dict) -> dict:
 
 def _load() -> None:
     cfg = json.loads(CONFIG_PATH.read_text())
-    members = [_load_member(m) for m in cfg["members"]]
-    bands = {"tau_high": 0.5, "tau_low": 0.5, **cfg.get("bands", {})}
-    _state.update(members=members, bands=bands)
-    names = [f"{Path(m['path']).parent.name}/{Path(m['path']).name}" for m in members]
-    print(f"[SIGAP] {len(members)} anggota dimuat: {names}; bands={bands}")
+    score_specs = cfg.get("score_members") or cfg.get("members") or []
+    unc_specs = cfg.get("uncertainty_members") or score_specs
+    cache: dict[str, dict] = {}
+
+    def get(spec: dict) -> dict:
+        p = spec["path"]
+        if p not in cache:
+            cache[p] = _load_member(spec)
+        return cache[p]
+
+    _state.update(
+        score_members=[get(s) for s in score_specs],
+        unc_members=[get(s) for s in unc_specs],
+        bands={"tau_high": 0.5, "tau_low": 0.5, **cfg.get("bands", {})},
+    )
+    print(f"[SIGAP] score={len(_state['score_members'])} unc={len(_state['unc_members'])} bands={_state['bands']}")
+
+
+def _names(members: list[dict]) -> list[str]:
+    return [f"{Path(m['path']).parent.name}/{Path(m['path']).name}" for m in members]
 
 
 def preprocess(img: Image.Image, size: int, mean=MEAN, std=STD) -> torch.Tensor:
@@ -123,8 +138,20 @@ def band_of(p: float, u: float, bands: dict) -> str:
     return "ragu"
 
 
+def infer_prob(member: dict, img: Image.Image) -> float:
+    if member["kind"] == "probe":
+        x = preprocess(img, member["size"], member.get("pixel_mean", MEAN), member.get("pixel_std", STD))
+        with torch.no_grad():
+            feats = member["model"](x).float().numpy()[0]
+        z = float(((feats - member["scaler_mean"]) / member["scaler_scale"]) @ member["coef"] + member["intercept"])
+    else:
+        x = preprocess(img, member["size"])
+        with torch.no_grad():
+            z = float(member["model"](x).squeeze(1).item())
+    return sigmoid(z / member["T"])
+
+
 def _cam_from_tokens(grads: torch.Tensor, acts: torch.Tensor, out_hw: tuple[int, int]) -> torch.Tensor | None:
-    """Grad-CAM untuk token ViT: buang CLS, reshape grid bila memungkinkan."""
     g, a = grads[1:], acts[1:]
     n = g.shape[0]
     side = int(round(n ** 0.5))
@@ -133,8 +160,7 @@ def _cam_from_tokens(grads: torch.Tensor, acts: torch.Tensor, out_hw: tuple[int,
     g = g.reshape(side, side, -1)
     a = a.reshape(side, side, -1)
     cam = (g * a).sum(-1).clamp(min=0)[None, None]
-    cam = nn.functional.interpolate(cam, size=out_hw, mode="bilinear", align_corners=False)
-    return cam[0, 0]
+    return nn.functional.interpolate(cam, size=out_hw, mode="bilinear", align_corners=False)[0, 0]
 
 
 def gradcam(member: dict, img: Image.Image) -> np.ndarray | None:
@@ -159,7 +185,7 @@ def gradcam(member: dict, img: Image.Image) -> np.ndarray | None:
         if hasattr(model, "forward_features"):
             feats = model.forward_features(x)
             pooled = model.forward_head(feats)
-        else:  # HF wrapper
+        else:
             feats = model.m(pixel_values=x).last_hidden_state
             pooled = feats[:, 0]
         feats = feats if feats.dim() == 3 else feats.flatten(2).transpose(1, 2)
@@ -173,8 +199,7 @@ def gradcam(member: dict, img: Image.Image) -> np.ndarray | None:
     if cam is None:
         return None
     cam = cam.detach()
-    cam = cam / (cam.amax() + 1e-8)
-    return cam.numpy()
+    return (cam / (cam.amax() + 1e-8)).numpy()
 
 
 def overlay_png(img: Image.Image, cam: np.ndarray) -> str:
@@ -196,15 +221,16 @@ def startup() -> None:
 @app.get("/health")
 def health() -> dict:
     return {
-        "status": "ok" if _state.get("members") else "no-model",
-        "members": [f"{Path(m['path']).parent.name}/{Path(m['path']).name}" for m in _state.get("members", [])],
+        "status": "ok" if _state.get("score_members") else "no-model",
+        "score_members": _names(_state.get("score_members", [])),
+        "uncertainty_members": _names(_state.get("unc_members", [])),
         "bands": _state.get("bands"),
     }
 
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)) -> dict:
-    if not _state.get("members"):
+    if not _state.get("score_members"):
         raise HTTPException(503, "model belum siap")
     raw = await file.read()
     try:
@@ -213,24 +239,15 @@ async def predict(file: UploadFile = File(...)) -> dict:
     except Exception as e:
         raise HTTPException(400, f"bukan citra valid: {e}")
 
-    probs: list[float] = []
-    for m in _state["members"]:
-        if m["kind"] == "probe":
-            x = preprocess(img, m["size"], m.get("pixel_mean", MEAN), m.get("pixel_std", STD))
-            with torch.no_grad():
-                feats = m["model"](x).float().numpy()[0]
-            z = float(((feats - m["scaler_mean"]) / m["scaler_scale"]) @ m["coef"] + m["intercept"])
-        else:
-            x = preprocess(img, m["size"])
-            with torch.no_grad():
-                z = float(m["model"](x).squeeze(1).item())
-        probs.append(sigmoid(z / m["T"]))
+    score_probs = [infer_prob(m, img) for m in _state["score_members"]]
+    extra = [m for m in _state["unc_members"] if m not in _state["score_members"]]
+    all_probs = score_probs + [infer_prob(m, img) for m in extra]
 
-    p = float(np.mean(probs))
-    u = float(np.std(probs))
+    p = float(np.mean(score_probs))
+    u = float(np.std(all_probs)) if len(all_probs) > 1 else 0.0
     band = band_of(p, u, _state["bands"])
 
-    cam = gradcam(_state["members"][0], img)
+    cam = gradcam(_state["score_members"][0], img)
     heatmap_b64 = overlay_png(img, cam) if cam is not None else None
 
     return {
@@ -238,7 +255,8 @@ async def predict(file: UploadFile = File(...)) -> dict:
         "uncertainty": round(u, 4),
         "band": band,
         "bands": _state["bands"],
-        "members": [f"{Path(m['path']).parent.name}/{Path(m['path']).name}" for m in _state["members"]],
+        "members": _names(_state["score_members"]),
+        "uncertainty_members": _names(_state["unc_members"]),
         "disclaimer": "Alat triase skrining — bukan diagnosis. Wajib konfirmasi (GeneXpert) oleh tenaga kesehatan.",
         "heatmap_png_b64": heatmap_b64,
     }

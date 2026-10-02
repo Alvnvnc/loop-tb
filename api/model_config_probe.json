@@ -1,0 +1,4 @@
+{
+  "members": [{ "path": "ml/runs/ssl_eval/probe_dinov2.npz" }],
+  "bands": { "tau_low": 0.0346, "tau_high": 0.0863, "tau_uncertainty": 1.0 }
+}

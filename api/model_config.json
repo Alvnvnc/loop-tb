@@ -1,7 +1,8 @@
 {
-  "members": [
+  "score_members": [{ "path": "ml/runs/ssl_eval/probe_dinov2.npz" }],
+  "uncertainty_members": [
     { "path": "ml/runs/eb0/best.pt", "T": 1.2336 },
     { "path": "ml/runs/convnext/best.pt", "T": 1.3405 }
   ],
-  "bands": { "tau_low": 0.1213, "tau_high": 0.4208, "tau_uncertainty": 0.4 }
+  "bands": { "tau_low": 0.0346, "tau_high": 0.0863, "tau_uncertainty": 0.2 }
 }
