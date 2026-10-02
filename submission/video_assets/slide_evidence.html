@@ -1,0 +1,24 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'></head><body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1920px; height:1080px; background:#0b0f13; color:#e9e7e0;
+         font-family:'Plus Jakarta Sans',sans-serif; display:flex; align-items:center; }
+  .pad { padding: 0 140px; width:100%; }
+  h1 { font-size:96px; font-weight:800; letter-spacing:-0.03em; line-height:1.04; }
+  p  { font-size:38px; line-height:1.45; color:rgba(233,231,224,.85); margin-top:36px; max-width:1500px; }
+  .small { font-size:26px; color:rgba(233,231,224,.55); margin-top:44px; }
+  .accent { color:#ee8b7e; } .defer { color:#e5b95c; } .clear { color:#83c7a4; }
+  table { border-collapse:collapse; margin-top:40px; font-size:34px; }
+  td, th { text-align:left; padding:14px 28px 14px 0; border-bottom:1px solid rgba(233,231,224,.18); }
+  th { font-size:26px; color:rgba(233,231,224,.55); font-weight:600; }
+  .num { font-variant-numeric: tabular-nums; font-weight:800; }
+</style><div class="pad">
+      <h1>We report the number most projects hide.</h1>
+      <table>
+        <tr><th>Evaluation</th><th>AUROC</th><th>sens@spec90</th></tr>
+        <tr><td>Internal random split <i>(the illusion)</i></td><td class="num">0.98 – 0.9999</td><td class="num">—</td></tr>
+        <tr><td>External hospitals · supervised fine-tune</td><td class="num">0.675</td><td class="num">0.27</td></tr>
+        <tr><td><b>External · RAD-DINO self-supervised probe (final)</b></td><td class="num clear">0.887</td><td class="num clear">0.71</td></tr>
+      </table>
+      <div class="small">Data audit removed 338 duplicate images and 19 training images that leaked into the external test set.</div></div></body></html>
