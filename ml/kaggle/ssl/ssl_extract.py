@@ -61,7 +61,9 @@ pick("data/raw/TB_Chest_Radiography_Database",
      ("Normal", "Tuberculosis"))
 pick("data/raw/nlm",
      ["/kaggle/input/datasets/alvinreba/nlm-tb-cxr-resized/nlm",
-      "/kaggle/input/nlm-tb-cxr-resized/nlm"],
+      "/kaggle/input/datasets/alvinreba/nlm-tb-cxr-resized",
+      "/kaggle/input/nlm-tb-cxr-resized/nlm",
+      "/kaggle/input/nlm-tb-cxr-resized"],
      ("shenzhen", "montgomery"))
 
 # --- siapkan daftar item (external: .png -> .jpg hasil resize) ---

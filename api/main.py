@@ -1,11 +1,18 @@
-"""Loop-TB API — inference + Grad-CAM + band triase.
+"""Loop-TB API — inference ensemble + Grad-CAM + band triase.
 
 Jalankan lokal:
     uvicorn api.main:app --host 0.0.0.0 --port 8000
 
-Env:
-    LOOPTB_CKPT  path ke checkpoint best.pt (default ml/runs/convnext_tiny/best.pt)
-    LOOPTB_BANDS path ke bands.json hasil evaluate.py (opsional; default τ=0.5/0.5)
+Konfigurasi (default `api/model_config.json`, override via env LOOPTB_CONFIG):
+{
+  "members": [
+    {"path": "ml/runs/eb0/best.pt",      "T": 1.23},
+    {"path": "ml/runs/convnext/best.pt", "T": 1.34}
+  ],
+  "bands": {"tau_low": 0.121, "tau_high": 0.421}
+}
+
+Probs = rata-rata sigmoid(z_i / T_i); ketidakpastian = std antar anggota.
 """
 from __future__ import annotations
 
@@ -28,11 +35,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 from torchvision import transforms as T
 
-CKPT_PATH = Path(os.environ.get("LOOPTB_CKPT", "ml/runs/convnext_tiny/best.pt"))
-BANDS_PATH = Path(os.environ.get("LOOPTB_BANDS", "")) if os.environ.get("LOOPTB_BANDS") else None
+CONFIG_PATH = Path(os.environ.get("LOOPTB_CONFIG", "api/model_config.json"))
 MEAN, STD = (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
 
-app = FastAPI(title="loop-tb", version="0.1.0")
+app = FastAPI(title="loop-tb (SIGAP)", version="0.2.0")
 app.add_middleware(
     CORSMiddleware, allow_origins=["*"], allow_credentials=False,
     allow_methods=["*"], allow_headers=["*"],
@@ -41,34 +47,33 @@ app.add_middleware(
 _state: dict = {}
 
 
-def _load() -> None:
-    if not CKPT_PATH.exists():
-        raise RuntimeError(f"Checkpoint tidak ditemukan: {CKPT_PATH}")
-    ckpt = torch.load(CKPT_PATH, map_location="cpu", weights_only=False)
+def _load_member(path: str) -> tuple[nn.Module, int]:
+    ckpt = torch.load(path, map_location="cpu", weights_only=False)
     model = timm.create_model(ckpt["arch"], pretrained=False, num_classes=1)
     model.load_state_dict(ckpt["state_dict"])
     model.eval()
-    bands = {"tau_high": 0.5, "tau_low": 0.5}
-    if BANDS_PATH and BANDS_PATH.exists():
-        b = json.loads(BANDS_PATH.read_text())
-        bands = {"tau_high": float(b.get("tau_high", 0.5)), "tau_low": float(b.get("tau_low", 0.5))}
-    size = int(ckpt["config"].get("img_size", 224))
-    _state.update(model=model, arch=ckpt["arch"], img_size=size, bands=bands)
-    print(f"[loop-tb] loaded {ckpt['arch']} @ {size}px  bands={bands}")
+    return model, int(ckpt["config"].get("img_size", 224))
 
 
-_tx = None
+def _load() -> None:
+    cfg = json.loads(CONFIG_PATH.read_text())
+    members = []
+    for m in cfg["members"]:
+        model, size = _load_member(m["path"])
+        members.append({"model": model, "T": float(m.get("T", 1.0)), "size": size, "path": m["path"]})
+    bands = {"tau_high": 0.5, "tau_low": 0.5, **cfg.get("bands", {})}
+    _state.update(members=members, bands=bands)
+    print(f"[SIGAP] {len(members)} anggota ensemble dimuat; bands={bands}")
 
 
-def preprocess(img: Image.Image) -> torch.Tensor:
-    global _tx
-    if _tx is None:
-        s = _state["img_size"]
-        _tx = T.Compose([T.Resize(int(s * 1.14)), T.CenterCrop(s), T.ToTensor(), T.Normalize(MEAN, STD)])
-    return _tx(img.convert("RGB")).unsqueeze(0)
+def preprocess(img: Image.Image, size: int) -> torch.Tensor:
+    tx = T.Compose([T.Resize(int(size * 1.14)), T.CenterCrop(size), T.ToTensor(), T.Normalize(MEAN, STD)])
+    return tx(img.convert("RGB")).unsqueeze(0)
 
 
-def band_of(p: float, bands: dict) -> str:
+def band_of(p: float, u: float, bands: dict) -> str:
+    if u > float(bands.get("tau_uncertainty", 1.0)):
+        return "ragu"
     if p >= bands["tau_high"]:
         return "rujuk_prioritas"
     if p < bands["tau_low"]:
@@ -77,7 +82,7 @@ def band_of(p: float, bands: dict) -> str:
 
 
 def gradcam(model: nn.Module, x: torch.Tensor) -> np.ndarray:
-    """Grad-CAM generik via forward_features (timm), tanpa asumsi arsitektur."""
+    """Grad-CAM generik via forward_features (timm)."""
     model.zero_grad(set_to_none=True)
     feats = model.forward_features(x)
     feats.retain_grad()
@@ -92,9 +97,9 @@ def gradcam(model: nn.Module, x: torch.Tensor) -> np.ndarray:
 
 def overlay_png(img: Image.Image, cam: np.ndarray) -> str:
     img_np = np.asarray(img.convert("RGB").resize((cam.shape[1], cam.shape[0])), dtype=np.float32) / 255.0
-    heat = cm.jet(cam)[..., :3]
-    alpha = (cam[..., None] * 0.45)
-    blend = img_np * (1 - alpha) + heat.astype(np.float32) * alpha
+    heat = cm.jet(cam)[..., :3].astype(np.float32)
+    alpha = cam[..., None] * 0.45
+    blend = img_np * (1 - alpha) + heat * alpha
     out = Image.fromarray((np.clip(blend, 0, 1) * 255).astype(np.uint8))
     buf = io.BytesIO()
     out.save(buf, format="PNG")
@@ -109,16 +114,15 @@ def startup() -> None:
 @app.get("/health")
 def health() -> dict:
     return {
-        "status": "ok",
-        "arch": _state.get("arch"),
-        "img_size": _state.get("img_size"),
+        "status": "ok" if _state.get("members") else "no-model",
+        "members": [f"{Path(m['path']).parent.name}/{Path(m['path']).name}" for m in _state.get("members", [])],
         "bands": _state.get("bands"),
     }
 
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)) -> dict:
-    if "model" not in _state:
+    if not _state.get("members"):
         raise HTTPException(503, "model belum siap")
     raw = await file.read()
     try:
@@ -127,20 +131,28 @@ async def predict(file: UploadFile = File(...)) -> dict:
     except Exception as e:
         raise HTTPException(400, f"bukan citra valid: {e}")
 
-    x = preprocess(img)
-    with torch.no_grad():
-        logit = _state["model"](x).squeeze(1)
-    p = float(torch.sigmoid(logit).item())
-    band = band_of(p, _state["bands"])
+    probs, logit_main = [], None
+    for m in _state["members"]:
+        x = preprocess(img, m["size"])
+        with torch.no_grad():
+            logit = m["model"](x).squeeze(1)
+        if logit_main is None:
+            logit_main = logit
+        probs.append(float(torch.sigmoid(logit / m["T"]).item()))
 
-    cam = gradcam(_state["model"], x)
+    p = float(np.mean(probs))
+    u = float(np.std(probs))
+    band = band_of(p, u, _state["bands"])
+
+    cam = gradcam(_state["members"][0]["model"], preprocess(img, _state["members"][0]["size"]))
     heatmap_b64 = overlay_png(img, cam)
 
     return {
         "p_tb": round(p, 4),
+        "uncertainty": round(u, 4),
         "band": band,
         "bands": _state["bands"],
-        "arch": _state.get("arch"),
+        "members": [f"{Path(m['path']).parent.name}/{Path(m['path']).name}" for m in _state["members"]],
         "disclaimer": "Alat triase skrining — bukan diagnosis. Wajib konfirmasi (GeneXpert) oleh tenaga kesehatan.",
         "heatmap_png_b64": heatmap_b64,
     }

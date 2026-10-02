@@ -56,3 +56,4 @@ python -c "import json; m=json.load(open('ml/data/artifacts/manifest.json')); pr
 3. **Kalibrasi tetap tantangan lintas-domain:** ECE eksternal 0,212–0,322 setelah temperature scaling (T≈1,2–2,4). Model overkonfiden ekstrem (logit val ~786).
 4. **Subgrup adil:** AUROC eksternal F 0,669 / M 0,682; usia 0–30: 0,631 · 30–50: 0,707 · 50+: 0,737 (tidak ada disparitas besar; celah di kelompok muda).
 5. **Aksi perbaikan (ADR-007):** studi representasi SSL (DINOv2 + RAD-DINO khusus X-ray dada) — audit melaporkan probe SSL mencapai ~0,88 pada transfer terkontrol; hasil menyusul di bagian 7.
+6. **Deferral berbasis ketidakpastian (ensemble disagreement):** pada data eksternal, kelompok 20% dengan disagreement tertinggi punya TB-rate 31% vs 54% pada sisanya → τ_u=0,40 dipakai di API `model_config.json` sebagai pemicu band "ragu".
