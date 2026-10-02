@@ -190,7 +190,7 @@ def main() -> None:
         "temp_scales": tscales, "tau_low": tau_low, "tau_high": tau_high,
         "bands": band_report,
         "deferral": {"rate": float((band == "ragu").mean()),
-                     "error_on_deferred": float(1 - (band[band == "ragu"] == y[band == "ragu"]).mean()) if (band == "ragu").any() else None},
+                     "tb_rate_on_deferred": float(y[band == "ragu"].mean()) if (band == "ragu").any() else None},
         "per_run_auroc": {k: float(roc_auc_score(y, v)) for k, v in per_run_target.items()},
     }
 
@@ -214,6 +214,13 @@ def main() -> None:
             }
 
     (args.out / "metrics.json").write_text(json.dumps(metrics, indent=1))
+    # dump prediksi per-citra (untuk analisis lanjutan & stacking)
+    import csv as _csv
+    with (args.out / "preds.csv").open("w", newline="") as f:
+        w = _csv.writer(f)
+        w.writerow(["path", "label", "p_ens", "u_ens"])
+        for it, p, u in zip(items, p_ens, u_ens):
+            w.writerow([it["path"], it["label"], float(p), float(u)])
     reliability_plot(y, p_ens, args.out / "reliability.png", f"Kalibrasi — {args.split}")
     curves = {f"ens ({args.split})": (y, p_ens)}
     if len(per_run_target) > 1:

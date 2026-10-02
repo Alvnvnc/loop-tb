@@ -1,0 +1,17 @@
+{
+  "id": "alvinreba/loop-tb-ssl-extract",
+  "title": "loop-tb-ssl-extract",
+  "code_file": "ssl_extract.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "vbookshelf/tbx11k-simplified",
+    "tawsifurrahman/tuberculosis-tb-chest-xray-dataset",
+    "alvinreba/nlm-tb-cxr-resized"
+  ],
+  "competition_sources": [],
+  "kernel_sources": []
+}

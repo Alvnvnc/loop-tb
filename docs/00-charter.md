@@ -49,6 +49,7 @@ Program nasional TOSS-TB memperluas skrining CXR + distribusi X-ray portabel, te
 | ADR-004 | Nama produk | ditunda sampai UI freeze |
 | ADR-005 | Deadline policy: target internal 7 Okt, submit awal, buffer 8–13 Okt hanya untuk polish/stretch tercatat | accepted — 2 Okt 2026 |
 | ADR-006 | Jalur training: **Colab/Kaggle GPU (T4)** — tidak ada GPU lokal; model kecil + checkpoint tiap epoch wajib | accepted — 2 Okt 2026 |
+| ADR-007 | **Studi representasi (dalam scope Recognition-DEEP):** bandingkan supervised fine-tune (EB0/ConvNeXt) vs probe SSL (DINOv2 umum + RAD-DINO khusus X-ray dada) di AUROC eksternal + kalibrasi; pilih pemenang untuk API. Bukan scope baru — ini pemilihan inti mesin. | accepted — 2 Okt 2026 |
 
 **Kebijakan perubahan (anti-berubah-ubah):**
 1. Setelah freeze, setiap penambahan scope **wajib menghapus item setara** (zero-sum) dan dicatat sebagai ADR superseding.
