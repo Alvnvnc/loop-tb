@@ -11,7 +11,7 @@ rm -rf "$STAGE" && mkdir -p "$STAGE/models"
 ( cd web && NEXT_EXPORT=1 NEXT_PUBLIC_API_URL="" npm run build )
 cp -r web/out "$STAGE/static"
 
-cp api/main.py api/requirements.txt api/model_config_space.json "$STAGE/"
+cp api/main.py api/requirements.txt api/model_config_space.json api/Dockerfile "$STAGE/"
 mv "$STAGE/model_config_space.json" "$STAGE/model_config.json"
 cp ml/runs/ssl_eval/probe_rad_dino.npz "$STAGE/models/probe_rad_dino.npz"
 cp ml/runs/ssl_eval/probe_dinov2.npz "$STAGE/models/probe_dinov2.npz"
