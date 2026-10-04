@@ -1,0 +1,46 @@
+[
+ {
+  "id": "chncxr_0338_1",
+  "title": "Kasus A \u2014 TB aktif",
+  "desc": "Ensemble sepakat: prioritas rujukan hari ini.",
+  "label": "TB",
+  "image": "chncxr_0338_1.jpg",
+  "result": "chncxr_0338_1.json",
+  "band": "rujuk_prioritas",
+  "p": 1.0,
+  "u": 0.0026
+ },
+ {
+  "id": "chncxr_0178_0",
+  "title": "Kasus B \u2014 normal dari RS asing",
+  "desc": "Keluarga model tidak sepakat \u2192 sistem menahan keputusan.",
+  "label": "normal",
+  "image": "chncxr_0178_0.jpg",
+  "result": "chncxr_0178_0.json",
+  "band": "ragu",
+  "p": 0.0038,
+  "u": 0.4976
+ },
+ {
+  "id": "chncxr_0495_1",
+  "title": "Kasus C \u2014 TB, bukti tidak konklusif",
+  "desc": "Bahkan untuk TB, ketidakpastian tinggi \u2192 pembacaan ulang oleh manusia.",
+  "label": "TB",
+  "image": "chncxr_0495_1.jpg",
+  "result": "chncxr_0495_1.json",
+  "band": "ragu",
+  "p": 0.9641,
+  "u": 0.4695
+ },
+ {
+  "id": "mcucxr_0044_0",
+  "title": "Kasus D \u2014 normal, mendekati negatif",
+  "desc": "Model cenderung rendah, tetapi ketidakpastian menjaga band ragu.",
+  "label": "normal",
+  "image": "mcucxr_0044_0.jpg",
+  "result": "mcucxr_0044_0.json",
+  "band": "ragu",
+  "p": 0.0478,
+  "u": 0.0196
+ }
+]
