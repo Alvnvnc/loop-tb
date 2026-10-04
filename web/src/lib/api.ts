@@ -3,8 +3,9 @@ export type Band = "rujuk_prioritas" | "ragu" | "negatif_skrining";
 export interface PredictResponse {
   p_tb: number;
   band: Band;
-  bands: { tau_high: number; tau_low: number };
+  bands: { tau_high: number; tau_low: number; tau_uncertainty?: number };
   arch?: string;
+  uncertainty?: number;
   disclaimer?: string;
   heatmap_png_b64?: string;
 }
@@ -19,43 +20,33 @@ export async function predict(file: File): Promise<PredictResponse> {
   return (await res.json()) as PredictResponse;
 }
 
-export const BAND_UI: Record<
+export const BAND_META: Record<
   Band,
-  { label: string; title: string; action: string; text: string; dot: string }
+  { labelKey: string; titleKey: string; actionKey: string; text: string; dot: string }
 > = {
   rujuk_prioritas: {
-    label: "Prioritas rujukan",
-    title: "Rujuk — prioritas hari ini",
-    action:
-      "Kirim pasien untuk pemeriksaan GeneXpert di fasilitas terdekat hari ini. Catat sebagai suspek TB pada buku register.",
+    labelKey: "scr.band.refer.label",
+    titleKey: "scr.band.refer.title",
+    actionKey: "scr.band.refer.action",
     text: "text-[#ee8b7e]",
     dot: "bg-refer",
   },
   ragu: {
-    label: "Perlu pembacaan ulang",
-    title: "Ragu — perlu pembacaan ulang",
-    action:
-      "Jangan diputuskan sendiri. Minta pembacaan oleh petugas/radiolog, atau ulangi skrining dengan citra yang lebih baik.",
+    labelKey: "scr.band.defer.label",
+    titleKey: "scr.band.defer.title",
+    actionKey: "scr.band.defer.action",
     text: "text-[#e5b95c]",
     dot: "bg-defer",
   },
   negatif_skrining: {
-    label: "Negatif skrining",
-    title: "Negatif skrining",
-    action:
-      "Edukasi gejala TB. Minta pasien kembali jika gejala berlanjut lebih dari 2 minggu atau memburuk.",
+    labelKey: "scr.band.neg.label",
+    titleKey: "scr.band.neg.title",
+    actionKey: "scr.band.neg.action",
     text: "text-[#83c7a4]",
     dot: "bg-clear",
   },
 };
 
 export function fmtPct(x: number, digits = 0): string {
-  return new Intl.NumberFormat("id-ID", {
-    style: "percent",
-    maximumFractionDigits: digits,
-  }).format(x);
-}
-
-export function fmtDate(iso: string): string {
-  return new Intl.DateTimeFormat("id-ID", { dateStyle: "long" }).format(new Date(iso));
+  return `${(x * 100).toFixed(digits)}%`;
 }

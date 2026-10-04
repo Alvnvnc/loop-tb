@@ -1,0 +1,23 @@
+{
+  "mode": "adapt",
+  "profile": "product-ui (dengan hero marketing di landing)",
+  "platform": "web (mobile-first, responsive)",
+  "destination": "code (Next.js + Tailwind, repo loop-tb)",
+  "projectRoot": "/home/alvn/Documents/playground/Devpost/univabio",
+  "task": "Redesign UI web SIGAP agar tidak terkesan polos/generik dan siap untuk juri hackathon internasional: dwibahasa EN default + toggle ID, hierarki lebih kuat, layar hasil yang meyakinkan, pengalaman mobile ala aplikasi.",
+  "acceptanceTasks": [
+    "Pilih bahasa EN/ID di header dan seluruh UI berganti (persisten setelah reload)",
+    "Unggah citra X-ray → lihat hasil dengan verdict, skala p(TB) + ambang, heatmap, kartu temuan",
+    "Galeri contoh arsip tetap berfungsi tanpa API",
+    "Loop pasien menampilkan kalimat insight, timeline status, dan bar check-in",
+    "Ringkasan klinisi menampilkan stat tiles + tabel/timeline",
+    "Cetak surat rujukan tetap rapi (print)",
+    "Deploy ulang ke GitHub Pages + VPS tanpa regresi"
+  ],
+  "constraints": [
+    "Pertahankan identitas: film hitam untuk panel hasil, kertas sejuk untuk formulir, warna hanya untuk makna triase",
+    "Tanpa dependensi UI berat; Tailwind + komponen sendiri",
+    "Harus tetap static-export friendly (tanpa server features)",
+    "Jangan merusak e2e yang ada (tools/e2e_screen.py, tools/gallery_check.py)"
+  ]
+}

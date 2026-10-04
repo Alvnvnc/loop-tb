@@ -35,3 +35,6 @@ submission/video_assets/*.html
 
 # hasil build static export (deploy)
 web/out/
+
+# aset referensi desain (gambar besar)
+.design/mobbin-stdir/**/images/

@@ -1,14 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #f2f4f5;
-  --color-ink: #14181d;
-  --color-film: #0b0f13;
+  --color-paper: #f3f5f6;
+  --color-mist: #e8ecee;
+  --color-ink: #12161b;
+  --color-film: #0a0e13;
   --color-bone: #e9e7e0;
   --color-refer: #c0392b;
   --color-defer: #b7791f;
   --color-clear: #2e7d5b;
   --font-sans: var(--font-jakarta), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --radius-control: 10px;
+  --radius-tile: 12px;
+  --radius-panel: 16px;
+  --shadow-tile: 0 1px 2px rgba(16, 20, 26, 0.05);
+  --shadow-float: 0 1px 2px rgba(16, 20, 26, 0.06), 0 16px 40px -20px rgba(16, 20, 26, 0.35);
 }
 
 html {
@@ -19,6 +26,11 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
 }
 
 ::selection {
@@ -43,8 +55,26 @@ body {
   }
 }
 
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 .reveal {
   animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.reveal-slow {
+  animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.grow-x {
+  transform-origin: left center;
+  animation: grow-x 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {

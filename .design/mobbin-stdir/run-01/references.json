@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "retrievedAt": "2026-10-04T18:12:00+07:00",
+  "queries": [
+    { "tool": "search_screens", "query": "medical AI screening result page with a risk score, verdict banner, confidence percentage and the uploaded scan image", "platform": "web" },
+    { "tool": "search_screens", "query": "health app upload screen with a large drop zone for a photo and a short patient detail form", "platform": "ios" },
+    { "tool": "search_flows", "query": "medical screening app: upload a scan, review the analysis result, save to patient record", "platform": "ios" },
+    { "tool": "search_sections", "query": "AI health technology landing page hero with a large headline, product screenshot and call to action" },
+    { "tool": "search_screens", "query": "patient monitoring dashboard with daily check-in timeline, adherence statistics and an alert banner", "platform": "web" }
+  ],
+  "selected": [
+    {
+      "id": "52444824-c16e-4d80-9b23-b0399581bb94",
+      "kind": "screen", "role": "primary", "sourceName": "Higgsfield",
+      "mobbinUrl": "https://mobbin.com/screens/52444824-c16e-4d80-9b23-b0399581bb94",
+      "localImage": "images/higgsfield_result.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Layar hasil gelap terbagi dua: kiri media yang dianalisis dengan track slider, kanan panel skor dengan angka besar (55/100), bar skala gradien LOW→HIGH, visualisasi panas (otak) berwarna, dan bar per-dimensi dengan persen." },
+        { "origin": "observed-image", "statement": "CTA terang ('Analyze another') kontras di bawah panel; label kecil redup untuk metadata." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Panel hasil SIGAP memakai bar skala probabilitas 0–100% dengan zona warna triase + penanda skor dan whisker ketidakpastian; heatmap CXR sebagai visualisasi utama.", "reason": "Menjawab acceptance 'hasil meyakinkan': skor + konteks ambang terlihat sekaligus." }
+      ],
+      "unknowns": ["DOM ownership", "durasi/easing animasi"]
+    },
+    {
+      "id": "0cfcf67d-b709-4ee2-b980-aa681732cac8",
+      "kind": "screen", "role": "supporting", "sourceName": "Hims",
+      "mobbinUrl": "https://mobbin.com/screens/0cfcf67d-b709-4ee2-b980-aa681732cac8",
+      "localImage": "images/hims_result.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Hasil sangat lapang: skor besar berwarna aksen (12/24) dengan label kategori, kolom kanan berisi penjelasan 'can feel like' sebagai daftar ringkas." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Kartu temuan hasil dipisah: 'Observed' vs 'Not shown' sebagai dua kartu status ringkas.", "reason": "Menjelaskan arti & batas tanpa menumpuk prosa." }
+      ],
+      "unknowns": ["palet persis", "font asli"]
+    },
+    {
+      "id": "998517e6-54d5-46d0-9caf-76480e38f897",
+      "kind": "screen", "role": "supporting", "sourceName": "Base44",
+      "mobbinUrl": "https://mobbin.com/screens/998517e6-54d5-46d0-9caf-76480e38f897",
+      "localImage": "images/base44_findings.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Temuan audit ditampilkan sebagai kartu bertumpuk dengan ikon status (kuning/merah/hijau), tiap kartu satu baris judul + detail; CTA hitam per kartu." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Kartu 'Observed / Not shown / Uncertainty' memakai pola kartu status bertumpuk.", "reason": "Scanability untuk kader & juri." }
+      ],
+      "unknowns": ["warna token asli"]
+    },
+    {
+      "id": "470d90c2-3137-4efb-9798-7dea10710d64",
+      "kind": "screen", "role": "supporting", "sourceName": "Uxcel",
+      "mobbinUrl": "https://mobbin.com/screens/470d90c2-3137-4efb-9798-7dea10710d64",
+      "localImage": "images/uxcel_report.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Skor 160 diposisikan terhadap histogram distribusi; tooltip menempel di bar; label '%ile'; ringkasan bar dengan angka x/100." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Bar skala hasil menandai posisi ambang (τ ragu, τ rujuk) sebagai tick berlabel.", "reason": "Konteks keputusan, bukan angka telanjang." }
+      ],
+      "unknowns": ["metrik sumbu"]
+    },
+    {
+      "id": "43835e9f-63b6-459d-afa6-89898751c8f8",
+      "kind": "screen", "role": "primary", "sourceName": "Walmart",
+      "mobbinUrl": "https://mobbin.com/screens/43835e9f-63b6-459d-afa6-89898751c8f8",
+      "localImage": "images/walmart_upload.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Preview foto besar dengan tombol X untuk hapus, tile '+' dashed untuk menambah, kotak tint panduan 'Check your prescription for accuracy' berisi checklist centang, lalu CTA full-width; disclaimer kecil di bawah." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Step unggah SIGAP: thumbnail + X, kotak panduan 'Before you analyze' (frontal view, no glare, de-identified), CTA full-width primary.", "reason": "Kualitas input menentukan kualitas triase; panduan mencegah gambar gagal." }
+      ],
+      "unknowns": ["behavior kamera"]
+    },
+    {
+      "id": "f91c4f65-bc27-4169-a247-c0bddaa4a3fa",
+      "kind": "screen", "role": "supporting", "sourceName": "Hims",
+      "mobbinUrl": "https://mobbin.com/screens/f91c4f65-bc27-4169-a247-c0bddaa4a3fa",
+      "localImage": "images/hims_upload.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Placeholder visual besar (foto wajah), action sheet sumber (Photo Library/Take Photo/Choose File), CTA besar, baris kepercayaan '256-BIT TLS SECURITY'." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Zona unggah memiliki ilustrasi radiograf SVG + baris kepercayaan 'Diproses lokal/di fasilitas — bukan diagnosis'.", "reason": "Menurunkan keraguan pengguna baru." }
+      ],
+      "unknowns": ["aset ilustrasi"]
+    },
+    {
+      "id": "9ef98c2f-994b-4b93-982e-a940aa0bbe29",
+      "kind": "screen", "role": "supporting", "sourceName": "CVS Health",
+      "mobbinUrl": "https://mobbin.com/screens/9ef98c2f-994b-4b93-982e-a940aa0bbe29",
+      "localImage": "images/cvs_upload.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Slot unggah kotak outline dengan pill button di dalamnya; slot ganda (depan/belakang)." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Slot form pasien memakai container ber-outline dengan label di dalam, konsisten dengan drop zone.", "reason": "Satu bahasa visual untuk input." }
+      ],
+      "unknowns": ["validasi form"]
+    },
+    {
+      "id": "e07ba966-7fda-4699-b107-2147745a8d81",
+      "kind": "section", "role": "primary", "sourceName": "Amigo",
+      "mobbinUrl": "https://mobbin.com/sites/sections/e07ba966-7fda-4699-b107-2147745a8d81",
+      "localImage": "images/amigo_hero.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Hero editorial: headline serif besar dua baris (baris kedua lebih redup), rail kiri berisi langkah bernomor (01 aktif + judul + prosa + CTA, 02–04 redup), visual pusat." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Hero landing SIGAP: rail kiri bernomor 01 Screen / 02 Refer / 03 Support (aktif menampilkan detail + CTA), kanan mockup ponsel berisi kartu hasil SIGAP.", "reason": "Menjelaskan loop + menunjukkan produk dalam satu layar; bukan hero template." }
+      ],
+      "unknowns": ["grid exact", "font serif asli"]
+    },
+    {
+      "id": "a66c7229-39c5-4f24-b34c-c09db551575d",
+      "kind": "section", "role": "supporting", "sourceName": "Superpower",
+      "mobbinUrl": "https://mobbin.com/sites/sections/a66c7229-39c5-4f24-b34c-c09db551575d",
+      "localImage": "images/superpower_hero.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Mockup ponsel besar di tengah hero dengan nav pill mengambang; headline dua warna." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Mockup perangkat hero memakai frame sederhana (mockup isi dibuat dari komponen nyata SIGAP, bukan gambar).", "reason": "Dapat diperbarui tanpa aset baru; tetap 'produk nyata'." }
+      ],
+      "unknowns": ["shadow device"]
+    },
+    {
+      "id": "61c93e74-ffee-4198-9ee1-868d71daa926",
+      "kind": "screen", "role": "primary", "sourceName": "Perplexity Health",
+      "mobbinUrl": "https://mobbin.com/screens/61c93e74-ffee-4198-9ee1-868d71daa926",
+      "localImage": "images/perplexity_health.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Halaman 'Welcome back' membuka dengan KALIMAT INSIGHT ('Your activity is spiky — a small plan for steadier movement will help'), kartu Overview dengan bar mini + label kualitas (Poor), kartu 'Daily Insights' dengan prosa + bullet aksi, input chat, sidebar konektor, disclaimer." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Halaman pasien dibuka dengan kalimat insight yang dihitung dari check-in (kepatuhan tren + risiko) dan bar mini 14 hari per check-in.", "reason": "Menjadikan data loop dapat dipahami sekali lihat." }
+      ],
+      "unknowns": ["aturan pembuatan insight asli"]
+    },
+    {
+      "id": "86231ec9-1c2b-4255-bfe0-8f30a3c32e4d",
+      "kind": "screen", "role": "supporting", "sourceName": "Hers",
+      "mobbinUrl": "https://mobbin.com/screens/86231ec9-1c2b-4255-bfe0-8f30a3c32e4d",
+      "localImage": "images/hers_timeline.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Timeline vertikal status: node selesai (check hijau), node aktif (highlight + judul besar + chip durasi), node akan datang (redup); tiap node berjudul + deskripsi singkat." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Timeline perjalanan pasien: Screening → Referral → Treatment → Follow-up dengan status node dari data demo.", "reason": "Memperlihatkan 'loop' secara struktural, bukan hanya daftar." }
+      ],
+      "unknowns": ["animasi progres"]
+    },
+    {
+      "id": "8d140229-3dec-4e38-aa2c-b16f18419001",
+      "kind": "screen", "role": "supporting", "sourceName": "Gorgias",
+      "mobbinUrl": "https://mobbin.com/screens/8d140229-3dec-4e38-aa2c-b16f18419001",
+      "localImage": "images/gorgias_stats.webp", "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Deretan stat tile (AGENTS ONLINE 1, OFFLINE 0, TICKETS 3/2) di atas chart volume dengan legenda." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Ringkasan klinisi memakai 4 stat tile di atas daftar kasus.", "reason": "Ikhtisar sekilas sebelum detail." }
+      ],
+      "unknowns": ["periode data"]
+    }
+  ],
+  "assetsToCreditInWriteup": [
+    "Higgsfield", "Hims", "Base44", "Uxcel", "Walmart", "CVS Health", "Amigo", "Superpower", "Perplexity Health", "Hers", "Gorgias"
+  ]
+}

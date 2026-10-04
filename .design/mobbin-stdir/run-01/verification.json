@@ -1,0 +1,49 @@
+{
+  "checks": [
+    {
+      "name": "Build produksi (static export) lolos",
+      "status": "passed",
+      "command": "cd web && npm run build",
+      "artifact": "web/.next (build log)"
+    },
+    {
+      "name": "Overflow horizontal 0px di 5 halaman x 3 viewport (1440/768/390)",
+      "status": "passed",
+      "command": ".venv/bin/python tools/ui_verify.py http://localhost:3210",
+      "artifact": ".design/mobbin-stdir/run-01/proof/*.png"
+    },
+    {
+      "name": "Tugas utama: buka galeri, pilih Kasus B, verdict 'Needs re-read' tampil (tanpa API)",
+      "status": "passed",
+      "command": "tools/ui_verify.py (archiveCase)",
+      "artifact": ".design/mobbin-stdir/run-01/proof/main_task_archive_case_mobile.png"
+    },
+    {
+      "name": "Toggle bahasa EN→ID + persist setelah reload",
+      "status": "passed",
+      "command": "tools/ui_verify.py (switchToID, persistsAfterReload)",
+      "artifact": ".design/mobbin-stdir/run-01/proof/after_lang_id_persist_mobile.png"
+    },
+    {
+      "name": "Fokus keyboard berpindah ke elemen interaktif (Tab pertama)",
+      "status": "passed",
+      "command": "tools/ui_verify.py (keyboardFocus = BUTTON)",
+      "artifact": null
+    },
+    {
+      "name": "Console error pada semua rute/viewport",
+      "status": "passed",
+      "command": "tools/ui_verify.py (consoleErrors = [])",
+      "artifact": null
+    }
+  ],
+  "motionFidelity": {
+    "status": "not-measured",
+    "reason": "Hanya referensi statis (gambar) yang tersedia; gerak (reveal, grow-x, hover) adalah keputusan desain kami sendiri, bukan rekonstruksi."
+  },
+  "remaining": [
+    "E2E dengan model live (v2) dijalankan setelah redeploy VPS",
+    "Cetak surat rujukan v2 diverifikasi setelah redeploy",
+    "Video demo diregenerasi dengan UI v2"
+  ]
+}

@@ -1,83 +1,79 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Tentang — SIGAP",
-};
+import { useLang } from "@/lib/i18n";
+
+const LIVE_URL = "https://ip-172-26-13-244.tail40f715.ts.net";
+const PAGES_URL = "https://alvnvnc.github.io/loop-tb";
 
 export default function TentangPage() {
+  const { t } = useLang();
+
   return (
-    <main className="mx-auto max-w-3xl px-5">
-      <section className="pt-10">
-        <h1 className="text-[26px] font-extrabold tracking-tight">Tentang SIGAP</h1>
-        <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-ink/75">
-          Indonesia adalah negara dengan beban tuberkulosis terbesar kedua di dunia: sekitar 10%
-          dari kasus global 2024 (WHO Global TB Report 2025), dengan ±200 ribu kasus per tahun yang
-          diperkirakan tidak pernah terdeteksi. SIGAP adalah prototipe riset yang menyerang akar
-          masalah itu: <strong>loop perawatan yang lebih lambat daripada penularannya</strong>.
-        </p>
+    <main className="mx-auto max-w-3xl px-4 sm:px-6">
+      <section className="pt-12">
+        <p className="text-[12.5px] font-semibold tracking-wide text-ink/45">{t("landing.kicker")}</p>
+        <h1 className="font-display mt-3 text-[34px] font-semibold leading-tight tracking-tight">{t("ab.title")}</h1>
+        <p className="font-display mt-5 max-w-2xl text-[19px] leading-relaxed text-ink/80">{t("ab.lede")}</p>
       </section>
 
-      <section className="mt-10 border-t border-ink/10 pt-8">
-        <h2 className="text-[16px] font-bold">Cara kerja</h2>
-        <ol className="mt-4 space-y-3 text-[15px] leading-relaxed text-ink/75">
-          <li>
-            <strong>Skrining.</strong> Citra X-ray diproses model klasifikasi TB yang dilatih pada
-            dataset publik (TBX11K dan basis Rahman) dan diuji secara eksternal pada korpus NLM
-            Shenzhen + Montgomery yang tidak pernah tersentuh training.
-          </li>
-          <li>
-            <strong>Kalibrasi & pita ragu.</strong> Skor dikalibrasi (temperature scaling) dan
-            diterjemahkan menjadi tiga band: prioritas rujukan, ragu (perlu pembacaan manusia), dan
-            negatif skrining. Ambang diambil dari titik kerja sensitivitas-target pada data validasi,
-            mengacu target TPP WHO.
-          </li>
-          <li>
-            <strong>Loop.</strong> Hasil skrining menjadi state risiko awal pada kartu pasien;
-            check-in harian memperbarui risiko dan memunculkan eskalasi bila memburuk.
-          </li>
+      <section className="mt-12">
+        <h2 className="font-display text-[24px] font-semibold">{t("ab.how.title")}</h2>
+        <ol className="mt-5 space-y-5">
+          {[1, 2, 3].map((n) => (
+            <li key={n} className="grid grid-cols-[44px_1fr] gap-4">
+              <span className="font-display pt-0.5 text-[17px] font-semibold tabular-nums text-ink/30">0{n}</span>
+              <p className="max-w-2xl text-[14.5px] leading-relaxed text-ink/75">{t(`ab.how.${n}`)}</p>
+            </li>
+          ))}
         </ol>
       </section>
 
-      <section className="mt-10 border-t border-ink/10 pt-8">
-        <h2 className="text-[16px] font-bold">Rigor yang bisa diperiksa</h2>
-        <ul className="mt-4 space-y-3 text-[15px] leading-relaxed text-ink/75">
-          <li>
-            Audit kebocoran: deduplikasi perseptual (pHash) menemukan 338 duplikat internal dan 19
-            citra train yang duplikat dengan test set eksternal — semuanya dibuang sebelum training
-            (split manifest tersedia di repositori).
-          </li>
-          <li>
-            Evaluasi eksternal lintas-rumah-sakit dengan AUROC + interval bootstrap, sensitivitas
-            pada spesifisitas 90%/70%, kalibrasi ECE, dan analisis subgrup usia/jenis kelamin dari
-            metadata Montgomery.
-          </li>
-          <li>
-            Keterbatasan dilaporkan, bukan disembunyikan: data publik bersifat radiografis (bukan
-            konfirmasi bakteriologis), reprocessing agresif dapat lolos dari deduplikasi, dan
-            belum ada data Indonesia.
-          </li>
-        </ul>
+      <section className="mt-12">
+        <h2 className="font-display text-[24px] font-semibold">{t("ab.rigor.title")}</h2>
+        <div className="mt-5 grid gap-3">
+          {[1, 2, 3].map((n) => (
+            <div key={n} className="flex items-start gap-3 rounded-tile border border-ink/10 bg-white/70 p-4 shadow-tile">
+              <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-clear" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="m8.5 12.2 2.4 2.4 4.6-5" />
+              </svg>
+              <p className="text-[14px] leading-relaxed text-ink/75">{t(`ab.rigor.${n}`)}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      <section className="mt-10 border-t border-ink/10 pt-8 pb-4">
-        <h2 className="text-[16px] font-bold">Kontak & sumber</h2>
-        <p className="mt-3 text-[15px] leading-relaxed text-ink/75">
-          Dibuat untuk UnivaBio 2026. Kode, split data, dan hasil evaluasi:{" "}
+      <section className="mt-12 rounded-panel bg-film p-6 text-bone shadow-float sm:p-8">
+        <h2 className="font-display text-[24px] font-semibold">{t("ab.links.title")}</h2>
+        <p className="mt-3 max-w-2xl text-[14px] leading-relaxed text-bone/70">{t("ab.links.body")}</p>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <a href={LIVE_URL} target="_blank" rel="noreferrer" className="rounded-control bg-bone px-4 py-2.5 text-[13.5px] font-bold text-film transition-all hover:-translate-y-0.5">
+            {t("landing.try.full")} ↗
+          </a>
+          <a href={PAGES_URL} target="_blank" rel="noreferrer" className="rounded-control border border-bone/30 px-4 py-2.5 text-[13.5px] font-semibold text-bone transition-colors hover:border-bone/60">
+            {t("landing.try.static")} ↗
+          </a>
           <a
-            className="underline decoration-ink/30 underline-offset-2 hover:text-ink"
             href="https://github.com/Alvnvnc/loop-tb"
             target="_blank"
             rel="noreferrer"
+            className="rounded-control border border-bone/30 px-4 py-2.5 text-[13.5px] font-semibold text-bone transition-colors hover:border-bone/60"
           >
-            github.com/Alvnvnc/loop-tb
+            GitHub ↗
           </a>
-          . Referensi utama: WHO consolidated guidelines on TB (Module 2: Screening, 2021) dan WHO
-          policy statement on CAD for TB screening (2025); Kemenkes (TOSS-TB).
-        </p>
-        <p className="mt-6 rounded-[10px] border border-ink/15 bg-white/70 p-4 text-[14px] leading-relaxed text-ink/70">
-          Pernyataan jujur: ini prototipe riset untuk kompetisi, <strong>bukan alat medis</strong>.
-          Jangan dipakai untuk keputusan klinis tanpa validasi dan pengawasan tenaga kesehatan.
-        </p>
+          <a
+            href="https://github.com/Alvnvnc/loop-tb/releases/tag/models-v1"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-control border border-bone/30 px-4 py-2.5 text-[13.5px] font-semibold text-bone transition-colors hover:border-bone/60"
+          >
+            models-v1 ↗
+          </a>
+        </div>
+      </section>
+
+      <section className="mt-12 pb-4">
+        <p className="rounded-panel border border-ink/15 bg-white/70 p-5 text-[14px] leading-relaxed text-ink/70">{t("ab.disclaimer")}</p>
       </section>
     </main>
   );

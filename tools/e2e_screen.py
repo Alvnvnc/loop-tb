@@ -29,8 +29,8 @@ def run_case(page, img: str, tag: str, pid: str) -> None:
     page.set_input_files('input[type="file"]', img)
     page.fill('input[placeholder="mis. S-014"]', pid)
     page.fill('input[placeholder="34"]', "42")
-    page.click("text=Analisis citra")
-    page.wait_for_selector("text=Hasil analisis", timeout=120_000)
+    page.click("text=Analyze image")
+    page.wait_for_selector("text=Analysis result", timeout=120_000)
     page.wait_for_timeout(600)
     page.screenshot(path=str(OUT / f"skrining_hasil_{tag}_mobile.png"), full_page=True)
     verdict = page.locator("section >> text=Hasil analisis").first
