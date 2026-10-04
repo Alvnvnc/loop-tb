@@ -1,6 +1,6 @@
 # SIGAP — calibrated triage for TB screening
 
-**UnivaBio 2026 · AI for Human Health** · Repo: [github.com/Alvnvnc/loop-tb](https://github.com/Alvnvnc/loop-tb)
+**UnivaBio 2026 · AI for Human Health** · Repo: [github.com/Alvnvnc/loop-tb](https://github.com/Alvnvnc/loop-tb) · Live demo: [ip-172-26-13-244.tail40f715.ts.net](https://ip-172-26-13-244.tail40f715.ts.net)
 
 ## Inspiration
 
