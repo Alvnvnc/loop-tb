@@ -13,7 +13,7 @@ Indonesia adalah negara beban TB **#2 dunia** (10% kasus global 2024, WHO GTR 20
 | Training (EB0, ConvNeXt-T, linear probe) di Kaggle GPU T4 | ✅ checkpoint terarsip |
 | Evaluasi eksternal (Shenzhen + Montgomery, 800 citra) | ✅ AUROC 0,64–0,68 — dilaporkan apa adanya |
 | Studi representasi SSL (DINOv2 + RAD-DINO) | 🔄 berjalan |
-| UI web (Skrining, Pasien, Klinisi, Tentang) | ✅ build hijau + screenshot di `submission/` |
+| UI web (5 halaman, dwibahasa EN/ID, redesign v2 berbasis referensi) | ✅ build hijau + verifikasi 3 viewport (nol console error) + screenshot di `submission/` |
 | API + Grad-CAM + band triase | ✅ lokal (deploy menyusul) |
 
 ## Hasil inti (yang biasanya disembunyikan)

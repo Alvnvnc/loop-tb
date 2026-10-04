@@ -1,4 +1,4 @@
-# Skrip video demo — SIGAP (target 2:45–3:00, narasi EN, UI ID)
+# Skrip video demo — SIGAP (target 2:45–3:00, narasi EN, UI EN default + toggle ID)
 
 > Prinsip: juri harus melihat (1) masalah nyata + angka, (2) hal yang benar-benar jalan, (3) kejujuran yang terdokumentasi. Rekaman layar lokal + slide angka.
 

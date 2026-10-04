@@ -25,6 +25,7 @@ Deadline platform: **13 Okt 2026 23:45 EDT** · halaman Rules (basi) menulis 7 O
 - [x] LICENSE (MIT + catatan intended use)
 - [x] **Uji perilaku deployment**: API vs offline r=0,986 (AUROC sampel 0,864 vs 0,867); robustness JPEG terdokumentasi
 - [x] **Model card** formal (`docs/05-model-card.md`)
+- [x] **UI v2 dwibahasa** (EN default + ID toggle) — redesign berbasis referensi Mobbin; verifikasi: overflow 0px ×5 halaman ×3 viewport, nol console error, toggle persist (`.design/mobbin-stdir/run-01/verification.json`)
 - [x] **Live demo penuh (VPS + Tailscale Funnel, HTTPS):** https://ip-172-26-13-244.tail40f715.ts.net — container Docker auto-restart, verifikasi publik lolos (health + UI 200 + predict p 0,9937 + fetch dari server pihak ketiga). RAM 1,86/3,74 GB.
 - [x] **UI statis (GitHub Pages)** memakai API live yang sama: https://alvnvnc.github.io/loop-tb/
 - [ ] Upload video (YouTube unlisted) → link ke Devpost
