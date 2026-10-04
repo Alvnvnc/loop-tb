@@ -32,8 +32,8 @@ python, pytorch, timm, huggingface-transformers, scikit-learn, fastapi, next.js,
 **Try it out links**
 | Label | URL |
 |---|---|
-| Live demo (UI statis + galeri arsip) | `https://alvnvnc.github.io/loop-tb/` |
-| Live API penuh (bila Space sudah deploy) | `<link HF Space>` |
+| **Live demo penuh (UI + API RAD-DINO)** | `https://ip-172-26-13-244.tail40f715.ts.net` |
+| UI statis (GitHub Pages, API live yang sama) | `https://alvnvnc.github.io/loop-tb/` |
 | Source code | `https://github.com/Alvnvnc/loop-tb` |
 | Model artifacts | `https://github.com/Alvnvnc/loop-tb/releases/tag/models-v1` |
 

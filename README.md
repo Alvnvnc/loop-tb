@@ -60,8 +60,10 @@ uvicorn api.main:app --port 8000
 
 ## Live demo
 
-- **UI statis (GitHub Pages, tanpa server):** https://alvnvnc.github.io/loop-tb/ — coba bagian **“Contoh arsip”** di halaman Skrining (4 kasus nyata dengan keluaran ensemble final + heatmap, dihitung offline).
-- **UI + API penuh (RAD-DINO live):** sedang disiapkan ke Hugging Face Spaces (`api/deploy_hf.sh`, butuh token HF). Situs statis dapat di-upgrade ke API live hanya dengan membangun ulang dengan `NEXT_PUBLIC_API_URL=<url-space>`.
+- **Aplikasi penuh (UI + API live) — VPS + Tailscale Funnel:** **https://ip-172-26-13-244.tail40f715.ts.net**
+  Upload citra X-ray baru → inferensi RAD-DINO ensemble + Grad-CAM, berjalan di container Docker pada VPS (port 8099, auto-restart). HTTPS, tanpa membuka port firewall.
+- **UI statis (GitHub Pages):** https://alvnvnc.github.io/loop-tb/ — memakai API live VPS yang sama untuk upload; tetap berfungsi (galeri "Contoh arsip") bila API tidak terjangkau.
+- Cara menyalakan/mematikan: di VPS → `sudo docker stop/start sigap`; funnel: `sudo tailscale funnel --bg 8099` / `sudo tailscale funnel reset`.
 
 ## Deployment (satu Space = UI + API)
 

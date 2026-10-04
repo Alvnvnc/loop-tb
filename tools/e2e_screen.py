@@ -14,6 +14,7 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+BASE = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:3210"
 OUT = Path("submission/screenshots")
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -24,7 +25,7 @@ CASES = [
 
 
 def run_case(page, img: str, tag: str, pid: str) -> None:
-    page.goto("http://localhost:3210/skrining", wait_until="networkidle")
+    page.goto(f"{BASE}/skrining", wait_until="networkidle")
     page.set_input_files('input[type="file"]', img)
     page.fill('input[placeholder="mis. S-014"]', pid)
     page.fill('input[placeholder="34"]', "42")
