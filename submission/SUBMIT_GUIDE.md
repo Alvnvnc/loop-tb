@@ -32,8 +32,9 @@ python, pytorch, timm, huggingface-transformers, scikit-learn, fastapi, next.js,
 **Try it out links**
 | Label | URL |
 |---|---|
-| Live demo (UI + API) | `<link Space dari deploy>` |
-| Source code | `https://github.com/Alvnc/loop-tb` ← **perbaiki: Alvnvnc** |
+| Live demo (UI statis + galeri arsip) | `https://alvnvnc.github.io/loop-tb/` |
+| Live API penuh (bila Space sudah deploy) | `<link HF Space>` |
+| Source code | `https://github.com/Alvnvnc/loop-tb` |
 | Model artifacts | `https://github.com/Alvnvnc/loop-tb/releases/tag/models-v1` |
 
 **Video demo** → tempel link YouTube unlisted.

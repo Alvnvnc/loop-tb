@@ -58,6 +58,11 @@ cd web && npm run dev
 uvicorn api.main:app --port 8000
 ```
 
+## Live demo
+
+- **UI statis (GitHub Pages, tanpa server):** https://alvnvnc.github.io/loop-tb/ — coba bagian **“Contoh arsip”** di halaman Skrining (4 kasus nyata dengan keluaran ensemble final + heatmap, dihitung offline).
+- **UI + API penuh (RAD-DINO live):** sedang disiapkan ke Hugging Face Spaces (`api/deploy_hf.sh`, butuh token HF). Situs statis dapat di-upgrade ke API live hanya dengan membangun ulang dengan `NEXT_PUBLIC_API_URL=<url-space>`.
+
 ## Deployment (satu Space = UI + API)
 
 `api/main.py` bisa menyajikan static export Next.js sehingga satu server melayani UI dan API (same-origin):
