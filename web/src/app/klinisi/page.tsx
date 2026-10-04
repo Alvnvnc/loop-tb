@@ -40,7 +40,7 @@ export default function KlinisiPage() {
   const dangerList = selected?.history.flatMap((h) => h.danger).slice(0, 3) ?? [];
 
   return (
-    <main className="mx-auto max-w-3xl px-4 sm:px-6">
+    <main className="mx-auto max-w-6xl px-4 sm:px-6">
       <section className="pt-10 print:hidden">
         <h1 className="font-display text-[30px] font-semibold tracking-tight">{t("cli.title")}</h1>
         <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-ink/70">{t("cli.sub")}</p>
@@ -52,14 +52,15 @@ export default function KlinisiPage() {
         </p>
       ) : (
         <>
-          <div className="mt-8 flex flex-wrap gap-2 print:hidden">
+          <div className="lg:grid lg:grid-cols-[250px_1fr] lg:items-start lg:gap-8">
+          <div className="mt-8 flex flex-wrap gap-2 print:hidden lg:flex-col lg:flex-nowrap">
             {cases.map((c) => (
               <button
                 key={c.id}
                 type="button"
                 onClick={() => setSelectedId(c.id)}
                 aria-pressed={selectedId === c.id}
-                className={`rounded-control border px-3.5 py-2 text-[13px] font-semibold transition-colors ${
+                className={`rounded-control border px-3.5 py-2 text-[13px] font-semibold transition-colors lg:w-full lg:text-left ${
                   selectedId === c.id ? "border-ink bg-ink text-paper" : "border-ink/20 bg-white/60 hover:border-ink/45"
                 }`}
               >
@@ -129,6 +130,7 @@ export default function KlinisiPage() {
               <p className="mt-6 text-[11.5px] leading-relaxed text-ink/45">{t("cli.note")}</p>
             </section>
           )}
+          </div>
         </>
       )}
     </main>

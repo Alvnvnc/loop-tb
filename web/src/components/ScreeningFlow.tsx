@@ -248,9 +248,11 @@ export default function ScreeningFlow() {
           <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-ink/70">{t("scr.sub")}</p>
         </section>
 
-        {/* Galeri contoh arsip */}
+        <div className="lg:grid lg:grid-cols-12 lg:items-start lg:gap-8">
+          <div className="lg:col-span-5">
+        {/* Galeri contoh arsip (mobile: di atas; desktop: rail kanan) */}
         {gallery.length > 0 && (
-          <section className="mt-8 rounded-panel border border-ink/10 bg-white/60 p-4 shadow-tile sm:p-5">
+          <section className="mt-8 rounded-panel border border-ink/10 bg-white/60 p-4 shadow-tile sm:p-5 lg:hidden">
             <h2 className="text-[15px] font-bold">{t("scr.gallery.title")}</h2>
             <p className="mt-1 text-[13px] leading-relaxed text-ink/60">{t("scr.gallery.desc")}</p>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -406,7 +408,7 @@ export default function ScreeningFlow() {
             type="button"
             onClick={analyze}
             disabled={!file || loading}
-            className="w-full rounded-control bg-ink px-6 py-3.5 text-[15px] font-semibold text-paper shadow-tile transition-all hover:-translate-y-0.5 hover:bg-ink/90 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 sm:w-auto"
+            className="w-full whitespace-nowrap rounded-control bg-ink px-6 py-3.5 text-[15px] font-semibold text-paper shadow-tile transition-all hover:-translate-y-0.5 hover:bg-ink/90 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 sm:w-auto"
           >
             {loading ? t("scr.analyzing") : t("scr.analyze")}
           </button>
@@ -428,10 +430,49 @@ export default function ScreeningFlow() {
             {error}
           </p>
         )}
+          </div>
 
-        {/* Hasil */}
+          {/* Rail kanan (desktop): galeri saat kosong, hasil setelah analisis */}
+          <div className="lg:col-span-7">
+        {(!result || !meta) && gallery.length > 0 && (
+          <section className="mt-8 hidden rounded-panel border border-ink/10 bg-white/60 p-4 shadow-tile sm:p-5 lg:mt-9 lg:block">
+            <h2 className="text-[15px] font-bold">{t("scr.gallery.title")}</h2>
+            <p className="mt-1 text-[13px] leading-relaxed text-ink/60">{t("scr.gallery.desc")}</p>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              {gallery.map((c) => {
+                const key = CASE_KEY[c.id];
+                const title = key ? t(`scr.case.${key}.title`) : c.title;
+                const desc = key ? t(`scr.case.${key}.desc`) : c.desc;
+                const dot = c.band === "rujuk_prioritas" ? "bg-refer" : c.band === "negatif_skrining" ? "bg-clear" : "bg-defer";
+                return (
+                  <button
+                    key={c.id}
+                    type="button"
+                    onClick={() => openCase(c)}
+                    aria-pressed={caseId === c.id}
+                    className={`rounded-tile border p-3 text-left transition-all hover:-translate-y-0.5 hover:shadow-tile ${
+                      caseId === c.id ? "border-ink bg-ink/5" : "border-ink/15 bg-paper/60 hover:border-ink/40"
+                    }`}
+                  >
+                    <span className="flex items-center gap-2 text-[13px] font-semibold">
+                      <span className={`inline-block h-2 w-2 rounded-full ${dot}`} />
+                      {title}
+                    </span>
+                    <span className="mt-1 block text-[12px] leading-relaxed text-ink/60">{desc}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        )}
+        {(!result || !meta) && (
+          <div className="mt-6 hidden rounded-panel border border-dashed border-ink/20 bg-film/[0.03] px-6 py-12 text-center lg:block">
+            <div className="mx-auto h-2.5 w-52 overflow-hidden rounded-full bg-[linear-gradient(90deg,#2e7d5b_0%,#2e7d5b_2%,#b7791f_10%,#c0392b_30%,#c0392b_100%)] opacity-70" />
+            <p className="mt-4 text-[14px] font-semibold text-ink/60">{t("scr.resultPlaceholder")}</p>
+          </div>
+        )}
         {result && meta && (
-          <section className="reveal mt-10" aria-live="polite">
+          <section className="reveal mt-10 lg:mt-9" aria-live="polite">
             <h2 className="text-[15px] font-bold">{t("scr.result")}</h2>
             <div className="mt-4 overflow-hidden rounded-panel bg-film text-bone shadow-float">
               <div className="relative aspect-[4/3]">
@@ -536,6 +577,8 @@ export default function ScreeningFlow() {
             </div>
           </section>
         )}
+          </div>
+        </div>
       </div>
 
       {/* Surat rujukan (hanya saat cetak) */}

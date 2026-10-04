@@ -9,7 +9,7 @@ export default function TentangPage() {
   const { t } = useLang();
 
   return (
-    <main className="mx-auto max-w-3xl px-4 sm:px-6">
+    <main className="mx-auto max-w-4xl px-4 sm:px-6">
       <section className="pt-12">
         <p className="text-[12.5px] font-semibold tracking-wide text-ink/45">{t("landing.kicker")}</p>
         <h1 className="font-display mt-3 text-[34px] font-semibold leading-tight tracking-tight">{t("ab.title")}</h1>
@@ -30,7 +30,7 @@ export default function TentangPage() {
 
       <section className="mt-12">
         <h2 className="font-display text-[24px] font-semibold">{t("ab.rigor.title")}</h2>
-        <div className="mt-5 grid gap-3">
+        <div className="mt-5 grid gap-3 lg:grid-cols-3">
           {[1, 2, 3].map((n) => (
             <div key={n} className="flex items-start gap-3 rounded-tile border border-ink/10 bg-white/70 p-4 shadow-tile">
               <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-clear" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">

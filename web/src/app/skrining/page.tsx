@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function SkriningPage() {
   return (
-    <main className="mx-auto max-w-3xl px-4 sm:px-6">
+    <main className="mx-auto max-w-6xl px-4 sm:px-6">
       <ScreeningFlow />
     </main>
   );

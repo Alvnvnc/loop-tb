@@ -19,7 +19,7 @@ export default function Home() {
   const todoList = ["1", "2", "3"].map((n) => t(`landing.evidence.todo.${n}`));
 
   return (
-    <main className="mx-auto max-w-5xl px-4 sm:px-6">
+    <main className="mx-auto max-w-6xl px-4 sm:px-6">
       {/* Hero */}
       <section className="grid gap-10 pt-12 pb-14 lg:grid-cols-12 lg:gap-8 lg:pt-16">
         <div className="lg:col-span-5">

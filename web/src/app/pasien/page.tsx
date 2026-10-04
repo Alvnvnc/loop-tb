@@ -135,7 +135,7 @@ export default function PasienPage() {
   }
 
   return (
-    <main className="mx-auto max-w-3xl px-4 sm:px-6">
+    <main className="mx-auto max-w-6xl px-4 sm:px-6">
       <section className="pt-10">
         <h1 className="font-display text-[30px] font-semibold tracking-tight">{t("pat.title")}</h1>
         <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-ink/70">{t("pat.sub")}</p>
@@ -181,8 +181,10 @@ export default function PasienPage() {
           </p>
         )}
 
+        <div className="lg:mt-5 lg:grid lg:grid-cols-12 lg:gap-6">
+          <div className="lg:col-span-5">
         {/* Stat tiles */}
-        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:mt-0 lg:grid-cols-2">
           {[
             [fmtPct(risk), t("pat.stat.risk"), risk >= 0.61 ? "text-refer" : risk >= 0.3 ? "text-defer" : "text-clear"],
             [String(selected.history.length), t("pat.stat.checkins"), ""],
@@ -221,9 +223,11 @@ export default function PasienPage() {
             </div>
           </div>
         )}
+        </div>
 
+        <div className="lg:col-span-7">
         {/* Timeline perawatan */}
-        <div className="mt-5 grid gap-5 sm:grid-cols-[1fr_1.2fr]">
+        <div className="mt-5 grid gap-5 sm:grid-cols-[1fr_1.2fr] lg:grid-cols-2">
           <div>
             <p className="text-[12px] font-bold text-ink/60">{t("pat.timeline.title")}</p>
             <ol className="mt-3 space-y-3">
@@ -325,6 +329,8 @@ export default function PasienPage() {
             </ul>
           </div>
         )}
+        </div>
+        </div>
 
         <p className="mt-6 text-[11.5px] leading-relaxed text-ink/45">{t("pat.note")}</p>
       </section>

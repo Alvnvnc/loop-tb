@@ -65,6 +65,7 @@ const DICT: Record<Lang, Record<string, string>> = {
     "scr.gallery.title": "Archive examples — no server",
     "scr.gallery.desc":
       "Four real cases from the external NLM corpus with outputs from the same final ensemble, computed offline — try the full flow without an API connection.",
+    "scr.resultPlaceholder": "Your triage result will appear here after analysis.",
     "scr.case.a.title": "Case A — Active TB",
     "scr.case.a.desc": "Ensemble agrees: refer today.",
     "scr.case.b.title": "Case B — Normal, unseen hospital",
@@ -296,6 +297,7 @@ const DICT: Record<Lang, Record<string, string>> = {
     "scr.gallery.title": "Contoh arsip — tanpa server",
     "scr.gallery.desc":
       "Empat kasus nyata dari korpus eksternal NLM dengan keluaran ensemble final yang sama, dihitung offline — coba alur lengkap tanpa koneksi API.",
+    "scr.resultPlaceholder": "Hasil triase akan muncul di sini setelah analisis.",
     "scr.case.a.title": "Kasus A — TB aktif",
     "scr.case.a.desc": "Ensemble sepakat: prioritas rujukan hari ini.",
     "scr.case.b.title": "Kasus B — normal dari RS asing",
