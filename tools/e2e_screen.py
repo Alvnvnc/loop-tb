@@ -27,7 +27,7 @@ CASES = [
 def run_case(page, img: str, tag: str, pid: str) -> None:
     page.goto(f"{BASE}/skrining", wait_until="networkidle")
     page.set_input_files('input[type="file"]', img)
-    page.fill('input[placeholder="mis. S-014"]', pid)
+    page.fill('input[placeholder="e.g. S-014"]', pid)
     page.fill('input[placeholder="34"]', "42")
     page.click("text=Analyze image")
     page.wait_for_selector("text=Analysis result", timeout=120_000)

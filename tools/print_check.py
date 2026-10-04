@@ -23,7 +23,7 @@ def main() -> None:
         page = browser.new_page(viewport={"width": 794, "height": 1123}, device_scale_factor=2)
         page.goto("http://localhost:3210/skrining", wait_until="networkidle")
         page.set_input_files('input[type="file"]', IMG)
-        page.fill('input[placeholder="mis. S-014"]', "S-014")
+        page.fill('input[placeholder="e.g. S-014"]', "S-014")
         page.fill('input[placeholder="34"]', "42")
         page.click("text=Analyze image")
         page.wait_for_selector("text=Analysis result", timeout=120_000)

@@ -12,6 +12,7 @@ Jalankan lewat helper (web 3210 + api 8000):
 """
 from __future__ import annotations
 
+import os
 import subprocess
 import wave
 from pathlib import Path
@@ -22,7 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "submission" / "video_assets"
 ASSETS.mkdir(parents=True, exist_ok=True)
 FINAL = ROOT / "submission" / "sigap_demo.mp4"
-VOICE_MODEL = "/tmp/opencode/piper/en/en_US/lessac/medium/en_US-lessac-medium.onnx"
+VOICE_MODEL = str(Path.home() / ".cache/piper/en/en_US/lessac/medium/en_US-lessac-medium.onnx")
 BASE = "http://localhost:3210"
 W, H = 1920, 1080
 
@@ -141,7 +142,7 @@ def record_clips() -> None:
         page.goto(f"{BASE}/skrining", wait_until="networkidle")
         page.wait_for_timeout(1200)
         page.set_input_files('input[type="file"]', str(ROOT / "data/raw/nlm/shenzhen/CXR_png/CHNCXR_0327_1.png"))
-        page.fill('input[placeholder="mis. S-014"]', "S-014")
+        page.fill('input[placeholder="e.g. S-014"]', "S-014")
         page.wait_for_timeout(800)
         page.click("text=Analyze image")
         page.wait_for_selector("text=Analysis result", timeout=120_000)
@@ -163,7 +164,7 @@ def record_clips() -> None:
         page.goto(f"{BASE}/skrining", wait_until="networkidle")
         page.wait_for_timeout(900)
         page.set_input_files('input[type="file"]', str(ROOT / "data/raw/nlm/shenzhen/CXR_png/CHNCXR_0001_0.png"))
-        page.fill('input[placeholder="mis. S-014"]', "S-015")
+        page.fill('input[placeholder="e.g. S-014"]', "S-015")
         page.click("text=Analyze image")
         page.wait_for_selector("text=Analysis result", timeout=120_000)
         page.wait_for_timeout(3200)
@@ -253,8 +254,17 @@ def assemble(wavs: list[Path]) -> None:
 
 
 def main() -> None:
-    render_slides()
-    record_clips()
+    force = os.environ.get("FORCE", "0") == "1"
+    need_slides = force or not all((ASSETS / f"{k}.png").exists() for k in SLIDES)
+    need_clips = force or not all((ASSETS / f"{n}.webm").exists() for n in ("clip_tb", "clip_normal", "clip_pasien"))
+    if need_slides:
+        render_slides()
+    else:
+        print("slides: skip (ada)")
+    if need_clips:
+        record_clips()
+    else:
+        print("clips: skip (ada)")
     wavs = narrate()
     assemble(wavs)
 
