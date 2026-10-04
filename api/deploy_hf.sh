@@ -3,7 +3,7 @@
 # Space: docker SDK, port 7860. Encoder DINOv2 diunduh saat runtime (butuh internet Space).
 set -euo pipefail
 SPACE_NAME="${SPACE_NAME:-sigap-api}"
-STAGE="/tmp/opencode/hf_space"
+STAGE="${STAGE:-$HOME/.cache/sigap/hf_space}"
 
 rm -rf "$STAGE" && mkdir -p "$STAGE/models"
 
