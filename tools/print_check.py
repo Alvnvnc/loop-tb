@@ -9,10 +9,12 @@ Jalankan dengan helper server (web 3210 + api 8000):
 """
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+BASE = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:3210"
 OUT = Path("submission/screenshots/referral_letter_print.png")
 IMG = "data/raw/nlm/shenzhen/CXR_png/CHNCXR_0327_1.png"
 
@@ -21,7 +23,7 @@ def main() -> None:
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page(viewport={"width": 794, "height": 1123}, device_scale_factor=2)
-        page.goto("http://localhost:3210/skrining", wait_until="networkidle")
+        page.goto(f"{BASE}/skrining", wait_until="networkidle")
         page.set_input_files('input[type="file"]', IMG)
         page.fill('input[placeholder="e.g. S-014"]', "S-014")
         page.fill('input[placeholder="34"]', "42")
