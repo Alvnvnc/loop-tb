@@ -14,7 +14,7 @@ One calibrated risk state drives the whole loop, through three interfaces:
 2. **Refer** — the score maps to an action band (refer today / re-read / educate) plus a **printable referral letter** for GeneXpert confirmation, aligned with Indonesia's TOSS-TB flow.
 3. **Support** — the same risk state follows the patient home: adherence check-ins update the score and trigger **escalation** when it worsens.
 
-The UI is Indonesian-first and mobile-first for community health workers (kaders): under three minutes per patient, audit-friendly outputs, printable artifacts.
+The UI ships in English (with an Indonesian toggle) and is **web-first responsive** — a two-column screening workspace on desktop with full mobile parity — built for community health workers (kaders): under three minutes per patient, audit-friendly outputs, printable artifacts.
 
 ## How we built it
 

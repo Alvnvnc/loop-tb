@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Uji integrasi UI+API: unggah citra X-ray lewat halaman /skrining, ambil screenshot hasil.
 
+Menjalankan dua pass: mobile (390×844) untuk kedua kasus dan desktop (1440×900)
+untuk kasus TB — bukti workspace web-first.
+
 Jalankan dengan helper server (web 3210 + api 8000):
   python /home/alvn/.agents/skills/webapp-testing/scripts/with_server.py \
     --server "cd web && npm start -- --port 3210" --port 3210 \
@@ -24,7 +27,7 @@ CASES = [
 ]
 
 
-def run_case(page, img: str, tag: str, pid: str) -> None:
+def run_case(page, img: str, tag: str, pid: str, suffix: str) -> None:
     page.goto(f"{BASE}/skrining", wait_until="networkidle")
     page.set_input_files('input[type="file"]', img)
     page.fill('input[placeholder="e.g. S-014"]', pid)
@@ -32,26 +35,33 @@ def run_case(page, img: str, tag: str, pid: str) -> None:
     page.click("text=Analyze image")
     page.wait_for_selector("text=Analysis result", timeout=120_000)
     page.wait_for_timeout(600)
-    page.screenshot(path=str(OUT / f"skrining_hasil_{tag}_mobile.png"), full_page=True)
-    verdict = page.locator("section >> text=Hasil analisis").first
-    print(f"[ok] {tag}: {img}")
+    page.screenshot(path=str(OUT / f"skrining_hasil_{tag}_{suffix}.png"), full_page=True)
+    print(f"[ok] {tag} ({suffix}): {img}")
 
 
 def main() -> None:
+    passes = [
+        ("mobile", {"width": 390, "height": 844}, 2, CASES),
+        ("desktop", {"width": 1440, "height": 900}, 1, CASES[:1]),
+    ]
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2)
-        page = ctx.new_page()
-        console: list[str] = []
-        page.on("console", lambda m: console.append(f"{m.type}: {m.text}") if m.type == "error" else None)
-        for img, tag, pid in CASES:
-            if not Path(img).exists():
-                print("[skip]", img)
-                continue
-            run_case(page, img, tag, pid)
-        if console:
-            print("[console errors]", console[:6])
-        ctx.close()
+        for suffix, vp, ds, cases in passes:
+            ctx = browser.new_context(viewport=vp, device_scale_factor=ds)
+            page = ctx.new_page()
+            console: list[str] = []
+            page.on(
+                "console",
+                lambda m: console.append(f"{m.type}: {m.text}") if m.type == "error" else None,
+            )
+            for img, tag, pid in cases:
+                if not Path(img).exists():
+                    print("[skip]", img)
+                    continue
+                run_case(page, img, tag, pid, suffix)
+            if console:
+                print(f"[{suffix} console errors]", console[:6])
+            ctx.close()
         browser.close()
     print("E2E SCREENSHOTS DONE")
 

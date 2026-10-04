@@ -1,12 +1,16 @@
 {
-  "version": 1,
+  "version": 2,
   "retrievedAt": "2026-10-04T18:12:00+07:00",
+  "revisedAt": "2026-10-05T09:30:00+07:00",
+  "revision": "web-first responsive layout: workspace desktop dua-kolom + dashboard (masukan: layout terasa mobile)",
   "queries": [
     { "tool": "search_screens", "query": "medical AI screening result page with a risk score, verdict banner, confidence percentage and the uploaded scan image", "platform": "web" },
     { "tool": "search_screens", "query": "health app upload screen with a large drop zone for a photo and a short patient detail form", "platform": "ios" },
     { "tool": "search_flows", "query": "medical screening app: upload a scan, review the analysis result, save to patient record", "platform": "ios" },
     { "tool": "search_sections", "query": "AI health technology landing page hero with a large headline, product screenshot and call to action" },
-    { "tool": "search_screens", "query": "patient monitoring dashboard with daily check-in timeline, adherence statistics and an alert banner", "platform": "web" }
+    { "tool": "search_screens", "query": "patient monitoring dashboard with daily check-in timeline, adherence statistics and an alert banner", "platform": "web" },
+    { "tool": "search_screens", "query": "web app workspace with an input form on the left and a results panel on the right", "platform": "web" },
+    { "tool": "search_screens", "query": "desktop report page with a wide main panel, large metric cards and stacked detail sections", "platform": "web" }
   ],
   "selected": [
     {
@@ -165,9 +169,141 @@
         { "origin": "design-decision", "statement": "Ringkasan klinisi memakai 4 stat tile di atas daftar kasus.", "reason": "Ikhtisar sekilas sebelum detail." }
       ],
       "unknowns": ["periode data"]
+    },
+    {
+      "id": "e27219ed-d597-45e4-af9a-a4ac52f6e591",
+      "kind": "screen", "role": "primary", "sourceName": "Exa",
+      "mobbinUrl": "https://mobbin.com/screens/e27219ed-d597-45e4-af9a-a4ac52f6e591",
+      "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Workspace 3 panel: nav kiri tipis, kolom tengah 'Research' (instruksi + pilihan model/output + tombol New Task), panel kanan 'Output' lebih lebar dengan tab Report/JSON berisi subtask berprogres dan laporan terstruktur ber-heading." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Halaman skrining menjadi workspace dua kolom: alur input kiri (5/12) + panel hasil kanan (7/12) dengan header panel dan konten ber-heading.", "reason": "Layout kerja desktop yang memakai lebar layar; hasil adalah panel, bukan lanjutan scroll." }
+      ],
+      "unknowns": ["behavior tab", "font asli"]
+    },
+    {
+      "id": "18950c8d-cd08-44f9-ab41-9edde6e84e5f",
+      "kind": "screen", "role": "primary", "sourceName": "fal",
+      "mobbinUrl": "https://mobbin.com/screens/18950c8d-cd08-44f9-ab41-9edde6e84e5f",
+      "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Split view: Input kiri (prompt besar, gambar referensi, dropdown resolusi, tombol Run kecil di kanan bawah panel) | Result kanan (media besar, aksi Download, panel log di bawah)." },
+        { "origin": "observed-image", "statement": "Tombol menjalankan berlabuh di panel input, bukan di tengah halaman; panel kanan punya aksi tingkat-hasil sendiri." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Tombol 'Analyze image' tetap di kolom input; panel hasil kanan membawa aksi kontekstual (Simpan ke rekam pasien / Cetak surat rujukan).", "reason": "Pemisahan peran: aksi menjalankan vs aksi atas hasil." }
+      ],
+      "unknowns": ["state loading panel kanan"]
+    },
+    {
+      "id": "e957e073-c1a4-4b93-b7ec-598a68f8a239",
+      "kind": "screen", "role": "primary", "sourceName": "Zoho CRM",
+      "mobbinUrl": "https://mobbin.com/screens/e957e073-c1a4-4b93-b7ec-598a68f8a239",
+      "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Form 'Configuration' kiri; panel kanan berjudul 'Output' dengan empty-state prosa kecil di tengah: 'Results will appear here when you execute this query.'" }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Rail kanan saat belum ada hasil menampilkan placeholder tenang ('hasil triase akan muncul di sini') + galeri contoh arsip di atasnya.", "reason": "Mengisi ruang desktop tanpa CTA palsu; mengajari alur sebelum aksi." }
+      ],
+      "unknowns": ["apakah panel kosong punya skeleton"]
+    },
+    {
+      "id": "7f34404c-ba21-432f-a80e-68ba834ebbd8",
+      "kind": "screen", "role": "supporting", "sourceName": "Base44",
+      "mobbinUrl": "https://mobbin.com/screens/7f34404c-ba21-432f-a80e-68ba834ebbd8",
+      "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Dashboard analytics: baris kartu stat di atas (Total Visits, Unique Visitors, Visit Duration dengan delta), chart area besar, lalu grid 2×2 kartu detail (Page Traffic/Country/OS/Referrer) dengan sidebar kiri." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Halaman pasien desktop: kartu stat 2×2 + bar 14 hari di kolom kiri; timeline/check-in/riwayat di kolom kanan.", "reason": "Hierarki dashboard: ringkasan dulu, detail operasional setelahnya." }
+      ],
+      "unknowns": ["periode default filter"]
+    },
+    {
+      "id": "5e6f8fac-fb49-4f8f-b9f9-94d538729695",
+      "kind": "screen", "role": "supporting", "sourceName": "Mintlify",
+      "mobbinUrl": "https://mobbin.com/screens/5e6f8fac-fb49-4f8f-b9f9-94d538729695",
+      "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Baris 5 stat (Visitors 8, Views 28, Assistant 5, Searches 17, Feedback 2) di atas chart batang; tab row + filter di bawah chart, sidebar nav kiri." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Ringkasan klinisi memakai baris 4 stat tile di atas konten detail (dipertahankan pada lebar desktop).", "reason": "Pola yang sama, kini bernapas di desktop." }
+      ],
+      "unknowns": ["state kosong"]
+    },
+    {
+      "id": "bcd89a45-fdd4-4a41-81d8-486725fd4b70",
+      "kind": "screen", "role": "supporting", "sourceName": "Semrush",
+      "mobbinUrl": "https://mobbin.com/screens/bcd89a45-fdd4-4a41-81d8-486725fd4b70",
+      "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Halaman report: sidebar kiri, blok 'AI Summary' berisi bullet, lalu dua kartu metrik besar berdampingan (Health 80%, AI Search Health 99%) di atas daftar detail." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Rail kiri klinisi (daftar kasus) meniru pola sidebar+main; kartu metrik angka besar dipakai untuk stat tile.", "reason": "Navigasi kasus tetap terlihat saat detail panjang di kanan." }
+      ],
+      "unknowns": ["ambil data real-time"]
+    },
+    {
+      "id": "5cfd2aab-b900-484e-bca8-7bec7cbdcc27",
+      "kind": "screen", "role": "supporting", "sourceName": "Cloudflare",
+      "mobbinUrl": "https://mobbin.com/screens/5cfd2aab-b900-484e-bca8-7bec7cbdcc27",
+      "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Blok metrik berulang: tiap kategori (Security/Cache/Errors/Network) = kartu berisi 4 metrik angka + sparkline, ditumpuk vertikal." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Stat tile klinisi disusun 4-up dalam satu baris dengan angka besar + label kecil.", "reason": "Konsistensi kepadatan data." }
+      ],
+      "unknowns": ["time range control"]
+    },
+    {
+      "id": "7486593b-f8a9-44a0-9959-b113cff27bf2",
+      "kind": "screen", "role": "supporting", "sourceName": "Obvious",
+      "mobbinUrl": "https://mobbin.com/screens/7486593b-f8a9-44a0-9959-b113cff27bf2",
+      "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Dashboard usage: chart batang 'Credits used over time', donut komposisi, dan 'Team activity' berupa bar horizontal per orang dengan angka di ujung." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Bar 14 hari + riwayat check-in pasien memakai pola bar-horizontal berlabel di ujung.", "reason": "Membandingkan hari lebih mudah secara horizontal." }
+      ],
+      "unknowns": ["warna kategori"]
+    },
+    {
+      "id": "ec065890-3f0a-4f36-82fc-e8124614569a",
+      "kind": "screen", "role": "supporting", "sourceName": "Airtable",
+      "mobbinUrl": "https://mobbin.com/screens/ec065890-3f0a-4f36-82fc-e8124614569a",
+      "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Kartu 'Count 6' berisi angka besar + chart batang; di bawahnya pivot table detail berwarna status." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Kartu riwayat pasien: angka besar (jumlah check-in) + baris detail berstatus.", "reason": "Dua tingkat kedalaman dalam satu kartu." }
+      ],
+      "unknowns": []
+    },
+    {
+      "id": "0178b96a-68ee-4710-8537-04c315a579a7",
+      "kind": "screen", "role": "supporting", "sourceName": "Optimal Workshop",
+      "mobbinUrl": "https://mobbin.com/screens/0178b96a-68ee-4710-8537-04c315a579a7",
+      "imageInspected": true,
+      "observations": [
+        { "origin": "observed-image", "statement": "Split: kiri daftar transkrip panjang, kanan panel ber-tab (Observations/Tasks/Session info) dengan selector peserta di atas; header tipis." }
+      ],
+      "adaptations": [
+        { "origin": "design-decision", "statement": "Halaman klinisi: rail kasus kiri + panel detail kanan; halaman pasien: kartu kiri (ringkasan) + kanan (timeline/check-in).", "reason": "Dua kolom untuk dua tugas berbeda (pilih vs baca)." }
+      ],
+      "unknowns": ["sinkron scroll"]
     }
   ],
   "assetsToCreditInWriteup": [
-    "Higgsfield", "Hims", "Base44", "Uxcel", "Walmart", "CVS Health", "Amigo", "Superpower", "Perplexity Health", "Hers", "Gorgias"
+    "Higgsfield", "Hims", "Base44", "Uxcel", "Walmart", "CVS Health", "Amigo", "Superpower", "Perplexity Health", "Hers", "Gorgias",
+    "Exa", "fal", "Zoho CRM", "Mintlify", "Semrush", "Cloudflare", "Obvious", "Airtable", "Optimal Workshop"
   ]
 }

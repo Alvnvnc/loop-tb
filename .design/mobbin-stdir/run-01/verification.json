@@ -7,6 +7,18 @@
       "artifact": "web/.next (build log)"
     },
     {
+      "name": "Revisi web-first v3: overflow 0px di 5 halaman x 3 viewport (build final)",
+      "status": "passed",
+      "command": ".venv/bin/python tools/ui_verify.py http://localhost:3210",
+      "artifact": ".design/mobbin-stdir/run-01/proof/*.png"
+    },
+    {
+      "name": "E2E LIVE v3: hasil TB & normal dari VPS + screenshot workspace desktop 1440x900",
+      "status": "passed",
+      "command": ".venv/bin/python tools/e2e_screen.py https://ip-172-26-13-244.tail40f715.ts.net",
+      "artifact": "submission/screenshots/skrining_hasil_tb_desktop.png (+ hasil mobile tb/normal)"
+    },
+    {
       "name": "Overflow horizontal 0px di 5 halaman x 3 viewport (1440/768/390)",
       "status": "passed",
       "command": ".venv/bin/python tools/ui_verify.py http://localhost:3210",

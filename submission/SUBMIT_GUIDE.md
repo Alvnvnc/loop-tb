@@ -8,7 +8,7 @@
 - [ ] Release model: https://github.com/Alvnvnc/loop-tb/releases/tag/models-v1
 - [ ] Video sudah di-upload ke YouTube (unlisted) → simpan linknya
 - [ ] Space live (hasil deploy) → simpan linknya
-- [ ] Gambar siap di `submission/screenshots/`: `skrining_hasil_tb_mobile.png`, `skrining_hasil_normal_mobile.png`, `landing_desktop.png`, `referral_letter_print.png`
+- [ ] Gambar siap di `submission/screenshots/`: `skrining_hasil_tb_desktop.png` (workspace + hasil), `skrining_desktop.png`, `landing_desktop.png`, `skrining_hasil_tb_mobile.png`, `referral_letter_print.png` (+ opsional `klinisi_filled_desktop.png`)
 
 ## Isian form Devpost
 
@@ -39,7 +39,7 @@ python, pytorch, timm, huggingface-transformers, scikit-learn, fastapi, next.js,
 
 **Video demo** → tempel link YouTube unlisted.
 
-**Gallery images** → upload 4 gambar di daftar pre-flight (urutan: skrining TB → normal ragu → landing → surat rujukan).
+**Gallery images** → upload 5 gambar di daftar pre-flight (urutan: workspace + hasil TB desktop → workspace galeri → landing → hasil mobile → surat rujukan).
 
 **Additional info / apa yang ingin ditambahkan**
 ```
