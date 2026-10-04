@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { BAND_UI, fmtPct, type Band } from "@/lib/api";
 
 type CheckIn = { date: string; med: boolean; symptoms: number; danger: string[] };
@@ -48,7 +49,7 @@ export default function KlinisiPage() {
 
       {cases.length === 0 ? (
         <p className="mt-8 text-[15px] text-ink/60">
-          Belum ada kasus tersimpan. Simpan hasil dari halaman <a className="underline" href="/skrining">Skrining</a>{" "}
+          Belum ada kasus tersimpan. Simpan hasil dari halaman <Link className="underline" href="/skrining">Skrining</Link>{" "}
           terlebih dahulu.
         </p>
       ) : (

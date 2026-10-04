@@ -1,7 +1,9 @@
 "use client";
 
-import { useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BAND_UI, fmtPct, predict, type PredictResponse } from "@/lib/api";
+
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 type Patient = { name: string; age: string; sex: string; complaint: string };
 
@@ -26,8 +28,22 @@ function StepTitle({ n, children }: { n: number; children: ReactNode }) {
   );
 }
 
+type GalleryCase = {
+  id: string;
+  title: string;
+  desc: string;
+  label: string;
+  image: string;
+  result: string;
+  band: PredictResponse["band"];
+  p: number;
+  u: number;
+};
+
 export default function ScreeningFlow() {
   const [file, setFile] = useState<File | null>(null);
+  const [gallery, setGallery] = useState<GalleryCase[]>([]);
+  const [caseId, setCaseId] = useState("");
   const [preview, setPreview] = useState("");
   const [patient, setPatient] = useState<Patient>(EMPTY_PATIENT);
   const [demo, setDemo] = useState(false);
@@ -38,6 +54,29 @@ export default function ScreeningFlow() {
   const [saved, setSaved] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    fetch(`${BASE_PATH}/cases/index.json`)
+      .then((r) => (r.ok ? r.json() : []))
+      .then((d) => setGallery(Array.isArray(d) ? d : []))
+      .catch(() => {});
+  }, []);
+
+  async function openCase(c: GalleryCase) {
+    try {
+      const r = await fetch(`${BASE_PATH}/cases/${c.result}`);
+      if (!r.ok) throw new Error("load");
+      const data = (await r.json()) as PredictResponse;
+      setPreview(`${BASE_PATH}/cases/${c.image}`);
+      setResult(data);
+      setOverlay("heatmap");
+      setCaseId(c.id);
+      setSaved(false);
+      setError("");
+    } catch {
+      setError("Gagal memuat contoh arsip.");
+    }
+  }
+
   function onPick(f: File | null | undefined) {
     if (!f) return;
     if (!f.type.startsWith("image/")) {
@@ -47,6 +86,7 @@ export default function ScreeningFlow() {
     setError("");
     setResult(null);
     setSaved(false);
+    setCaseId("");
     setFile(f);
     setPreview(URL.createObjectURL(f));
   }
@@ -58,11 +98,12 @@ export default function ScreeningFlow() {
     setResult(null);
     try {
       const r = demo ? DEMO_RESULT : await predict(file);
+      setCaseId("");
       setResult(r);
       setOverlay(r.heatmap_png_b64 ? "heatmap" : "original");
     } catch {
       setError(
-        "Server model tidak terjangkau. Nyalakan mode peragaan untuk mendemokan alurnya, atau periksa koneksi API."
+        "Server model tidak tersedia. Coba Contoh arsip di atas (keluaran ensemble final — tanpa server), atau nyalakan mode peragaan."
       );
     } finally {
       setLoading(false);
@@ -97,6 +138,40 @@ export default function ScreeningFlow() {
   return (
     <>
       <div className="print:hidden">
+        {/* Galeri contoh arsip (deployment statis) */}
+        {gallery.length > 0 && (
+          <section className="mt-8 rounded-[12px] border border-ink/12 bg-white/60 p-4 sm:p-5">
+            <h2 className="text-[15px] font-bold">Contoh arsip — tanpa server</h2>
+            <p className="mt-1 text-[13px] leading-relaxed text-ink/60">
+              Empat kasus nyata dari korpus eksternal (NLM) dengan keluaran <strong>ensemble final yang sama</strong>
+              , dihitung offline — untuk mencoba alur lengkap tanpa koneksi API.
+            </p>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              {gallery.map((c) => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => openCase(c)}
+                  aria-pressed={caseId === c.id}
+                  className={`rounded-[10px] border p-3 text-left transition-colors ${
+                    caseId === c.id ? "border-ink bg-ink/5" : "border-ink/15 hover:border-ink/40"
+                  }`}
+                >
+                  <span className="flex items-center gap-2 text-[13px] font-semibold">
+                    <span
+                      className={`inline-block h-2 w-2 rounded-full ${
+                        c.band === "rujuk_prioritas" ? "bg-refer" : c.band === "negatif_skrining" ? "bg-clear" : "bg-defer"
+                      }`}
+                    />
+                    {c.title}
+                  </span>
+                  <span className="mt-1 block text-[12px] leading-relaxed text-ink/60">{c.desc}</span>
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* 1 — Citra */}
         <section className="mt-9">
           <StepTitle n={1}>Citra X-ray dada</StepTitle>
@@ -303,6 +378,13 @@ export default function ScreeningFlow() {
               </div>
             </div>
 
+            {caseId && (
+              <p className="mt-4 rounded-[8px] border border-ink/15 bg-white/70 px-4 py-3 text-[13px] leading-relaxed text-ink/65">
+                Keluaran arsip — dihitung offline dengan model final pada citra contoh korpus eksternal (NLM).
+                Mode server langsung tersedia saat API terhubung.
+              </p>
+            )}
+
             {/* Penjelasan */}
             <div className="mt-6 grid gap-5 sm:grid-cols-2">
               <div className="rounded-[10px] border border-ink/12 bg-white/70 p-4">
@@ -344,6 +426,7 @@ export default function ScreeningFlow() {
                   setSaved(false);
                   setFile(null);
                   setPreview("");
+                  setCaseId("");
                 }}
                 className="rounded-[8px] px-5 py-3 text-[14px] font-semibold text-ink/60 hover:bg-ink/5 hover:text-ink"
               >

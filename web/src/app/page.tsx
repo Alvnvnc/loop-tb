@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   const steps = [
     {
@@ -30,18 +32,18 @@ export default function Home() {
           Bukan skor lain — triase terkalibrasi yang tahu kapan dirinya harus ragu.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
-          <a
+          <Link
             href="/skrining"
             className="rounded-[8px] bg-ink px-5 py-3 text-[15px] font-semibold text-paper transition-colors hover:bg-ink/90"
           >
             Mulai skrining
-          </a>
-          <a
+          </Link>
+          <Link
             href="/pasien"
             className="rounded-[8px] border border-ink/20 px-5 py-3 text-[15px] font-semibold transition-colors hover:border-ink/45"
           >
             Lihat alur pendampingan
-          </a>
+          </Link>
         </div>
       </section>
 
