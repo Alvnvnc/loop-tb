@@ -13,7 +13,7 @@
       "artifact": ".design/mobbin-stdir/run-01/proof/*.png"
     },
     {
-      "name": "Tugas utama: buka galeri, pilih Kasus B, verdict 'Needs re-read' tampil (tanpa API)",
+      "name": "Tugas utama: galeri → Kasus B → verdict 'Needs re-read' (tanpa API)",
       "status": "passed",
       "command": "tools/ui_verify.py (archiveCase)",
       "artifact": ".design/mobbin-stdir/run-01/proof/main_task_archive_case_mobile.png"
@@ -35,15 +35,41 @@
       "status": "passed",
       "command": "tools/ui_verify.py (consoleErrors = [])",
       "artifact": null
+    },
+    {
+      "name": "E2E LIVE: unggah TB & normal via GitHub Pages (UI v2) → API VPS lintas-origin",
+      "status": "passed",
+      "command": ".venv/bin/python tools/e2e_screen.py https://alvnvnc.github.io/loop-tb",
+      "artifact": "submission/screenshots/skrining_hasil_tb_mobile.png, skrining_hasil_normal_mobile.png"
+    },
+    {
+      "name": "Galeri arsip di URL live (Pages)",
+      "status": "passed",
+      "command": ".venv/bin/python tools/gallery_check.py https://alvnvnc.github.io/loop-tb",
+      "artifact": "submission/screenshots/gallery_case_b.png"
+    },
+    {
+      "name": "Cetak surat rujukan di deployment live (VPS)",
+      "status": "passed",
+      "command": ".venv/bin/python tools/print_check.py https://ip-172-26-13-244.tail40f715.ts.net",
+      "artifact": "submission/screenshots/referral_letter_print.png"
+    },
+    {
+      "name": "Screenshot 5 halaman x 2 viewport dari deployment live (VPS)",
+      "status": "passed",
+      "command": ".venv/bin/python tools/screenshot_ui.py https://ip-172-26-13-244.tail40f715.ts.net",
+      "artifact": "submission/screenshots/*.png"
+    },
+    {
+      "name": "Video demo v2 (UI redesign, copy final) diregenerasi otomatis",
+      "status": "passed",
+      "command": "FORCE=1 .venv/bin/python tools/make_video.py (via with_server)",
+      "artifact": "submission/sigap_demo.mp4 (1:36, 1080p)"
     }
   ],
   "motionFidelity": {
     "status": "not-measured",
     "reason": "Hanya referensi statis (gambar) yang tersedia; gerak (reveal, grow-x, hover) adalah keputusan desain kami sendiri, bukan rekonstruksi."
   },
-  "remaining": [
-    "E2E dengan model live (v2) dijalankan setelah redeploy VPS",
-    "Cetak surat rujukan v2 diverifikasi setelah redeploy",
-    "Video demo diregenerasi dengan UI v2"
-  ]
+  "remaining": []
 }

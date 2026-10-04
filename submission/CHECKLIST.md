@@ -7,7 +7,7 @@ Deadline platform: **13 Okt 2026 23:45 EDT** · halaman Rules (basi) menulis 7 O
 | # | Requirement | Artefak | Status |
 |---|---|---|---|
 | 1 | Project (website/app/prototipe dengan interaksi user) | `web/` (5 halaman) + `api/` (ensemble + Grad-CAM + band) | ✅ jalan & teruji e2e |
-| 2 | Demo video (tujuan + fitur + interaksi) | `submission/sigap_demo.mp4` — 1:37, 1080p, narasi EN | ✅ (dapat ditingkatkan: potong fase tunggu analisis / narasi suara sendiri) |
+| 2 | Demo video (tujuan + fitur + interaksi) | `submission/sigap_demo.mp4` — **1:36, 1080p, narasi EN, UI v2** (klip direkam dari deployment final) | ✅ |
 | 3 | One Page Project Description (PDF) | `submission/onepager.pdf` | ✅ |
 | 4 | GitHub repo / Code PDF | repo publik + `submission/code_listing.pdf` | ✅ |
 
